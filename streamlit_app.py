@@ -12,6 +12,7 @@ st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 def processa_pdf():
     st.write('PDF processado')
     st.sidebar.write('PDF processado sidebar')
+    container.write("PDF processado no container")
     return
 
 file_match = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
@@ -22,12 +23,8 @@ else:
 
 st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
 
-
-with st.beta_container():
-   st.write("This is inside the container")
-
-   # You can call any Streamlit command, including custom components:
-   st.bar_chart(np.random.randn(50, 3))
+container = st.beta_container()
+container.write("This is inside the container")
 
 st.write("This is outside the container")
 
