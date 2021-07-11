@@ -9,6 +9,10 @@ st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
 st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
+container = st.beta_container()
+container.write("This is inside the container")
+st.write("This is outside the container")
+
 def processa_pdf():
     st.write('PDF processado')
     st.sidebar.write('PDF processado sidebar')
@@ -22,10 +26,6 @@ else:
    st.sidebar.write('Goodbye')
 
 st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
-
-container = st.beta_container()
-container.write("This is inside the container")
-st.write("This is outside the container")
 
 @st.cache
 def fetch_and_clean_data():
