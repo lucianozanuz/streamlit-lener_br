@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
+import pdftotext
+
 st.write(st.session_state)
 
 st.title('Reconhecimento de Entidades Nomeadas')
@@ -26,9 +28,7 @@ if uploaded_file is not None:
    bytes_data = uploaded_file.getvalue()
    st.write(bytes_data)
 
-   # To convert to a string based IO:
-   stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-   st.write(stringio)
+ 
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
