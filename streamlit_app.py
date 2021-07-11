@@ -54,6 +54,9 @@ if st.checkbox('Show dataframe'):
 
     st.map(map_data)
 
+x = st.slider('x')  # 👈 this is a widget
+st.write(x, 'squared is', x * x)    
+    
 x = st.slider('Select a value')
 st.write(x, 'squared is', x * x)
 
