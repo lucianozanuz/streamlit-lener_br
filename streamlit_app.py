@@ -25,8 +25,10 @@ def processa_pdf():
 
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 if uploaded_file is not None:
+    bytes_data = uploaded_file.getvalue()
+    
     # creating a pdf file object 
-    pdfFileObj = open(uploaded_file, 'rb') 
+    pdfFileObj = open(bytes_data, 'rb') 
 
     # creating a pdf reader object 
     pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
