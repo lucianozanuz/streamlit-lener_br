@@ -2,11 +2,17 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
-# Add a title
 st.title('Título da aplicação')
 st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
 st.text('Texto: Upload excel files with only one column, even if you put multiple columns only the first one will be used')
+
+
+st.sidebar.title('Título da aplicação')
+st.sidebar.header('Header da aplicação.')
+st.sidebar.subheader('Subheader da aplicação')
+st.sidebar.text('Texto: Upload excel files with only one column, even if you put multiple columns only the first one will be used')
+
 
 
 with st.form("my_form"):
@@ -20,6 +26,7 @@ with st.form("my_form"):
        st.write("slider", slider_val, "checkbox", checkbox_val)
 
 st.write("Outside the form")
+
 
 
 
