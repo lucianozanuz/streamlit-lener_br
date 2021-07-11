@@ -21,15 +21,6 @@ st.write("Outside the form")
 
 
 
-
-
-# form ainda não disponível na cloud
-with st.form(key='my_form'):
-    conteúdo do form
-    submit_button = st.form_submit_button(label='Submit')
-if submit_button:
-    conteúdo
-
 #st.header('This is some header.')
 st.subheader('Upload your Excel files')
 st.text('Upload excel files with only one column, even if you put multiple columns only the first one will be used')
