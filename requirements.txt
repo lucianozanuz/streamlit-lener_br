@@ -1,5 +1,5 @@
 streamlit
-pdftotext
+PyPDF2
 torch
 transformers
 spacy
