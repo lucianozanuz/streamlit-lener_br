@@ -25,7 +25,6 @@ st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
 
 container = st.beta_container()
 container.write("This is inside the container")
-
 st.write("This is outside the container")
 
 @st.cache
