@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
+st.write(st.session_state)
+
 st.title('Reconhecimento de Entidades Nomeadas')
 st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
@@ -14,12 +16,13 @@ st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
 def processa_pdf():
     st.write('PDF processado')
-    st.write('PDF processado sidebar')
+    st.sidebar.write('PDF processado sidebar')
+    return
 
 file_match = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 if st.sidebar.button('Enviar'):
    st.sidebar.write('Why hello there')
-   st.sidebar.write('Why hello there')
+   st.sidebar.button('Enviar')
 else:
    st.sidebar.write('Goodbye')
 
@@ -30,11 +33,3 @@ def fetch_and_clean_data():
     df = pd.read_csv('<some csv>')
     # do some cleaning
     return df
-
-
-# Or even better, call Streamlit functions inside a "with" block:
-with right_column:
-    chosen = st.radio(
-        'Sorting hat',
-        ("Gryffindor", "Ravenclaw", "Hufflepuff", "Slytherin"))
-    st.write(f"You are in {chosen} house!")
