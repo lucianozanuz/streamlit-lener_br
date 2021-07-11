@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
+from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
+
 import PyPDF2 
 from PyPDF2 import PdfFileWriter, PdfFileReader
 
