@@ -2,16 +2,15 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
-st.title('Título da aplicação')
+st.title('Reconhecimento de Entidades Nomeadas')
 st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
-st.text('Texto: Upload excel files with only one column, even if you put multiple columns only the first one will be used')
+st.text('Carregue o PDF de uma petição inicial e clique em Enviar')
 
-
-st.sidebar.title('Título da aplicação')
-st.sidebar.header('Header da aplicação.')
-st.sidebar.subheader('Subheader da aplicação')
-st.sidebar.text('Texto: Upload excel files with only one column, even if you put multiple columns only the first one will be used')
+#st.sidebar.title('Reconhecimento de Entidades Nomeadas')
+#st.sidebar.header('Header da aplicação.')
+#st.sidebar.subheader('Subheader da aplicação')
+#st.sidebar.text('Texto: Upload excel files with only one column, even if you put multiple columns only the first one will be used')
 
 
 
