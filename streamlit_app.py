@@ -20,7 +20,12 @@ def processa_pdf():
     container.write("This is inside the container 3")
     return
 
-file_match = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+if uploaded_file is not None:
+   # To read file as bytes:
+   bytes_data = uploaded_file.getvalue()
+   st.write(bytes_data)
+
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
 #else:
