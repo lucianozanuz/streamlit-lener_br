@@ -22,7 +22,6 @@ def processa_pdf():
 file_match = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 if st.sidebar.button('Enviar', key='bt_enviar'):
    st.sidebar.write('Why hello there')
-   st.sidebar.button(key='bt_enviar') = false
 else:
    st.sidebar.write('Goodbye')
 
