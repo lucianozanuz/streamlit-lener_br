@@ -23,11 +23,7 @@ if st.sidebar.button('Enviar'):
 else:
    st.sidebar.write('Goodbye')
 
-if st.sidebar.button('Enviar cli', on_click='processa_pdf'):
-   st.sidebar.write('Why hello there')
-else:
-   st.sidebar.write('Goodbye')
-
+st.sidebar.button('Enviar click', on_click=processa_pdf)
    
 @st.cache
 def fetch_and_clean_data():
