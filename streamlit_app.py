@@ -20,13 +20,13 @@ def processa_pdf():
     return
 
 file_match = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
-if st.sidebar.button('Enviar'):
+if st.sidebar.button('Enviar', key=bt_enviar):
    st.sidebar.write('Why hello there')
-   st.sidebar.button('Enviar')
+   bt_enviar=false
 else:
    st.sidebar.write('Goodbye')
 
-st.sidebar.button('Enviar click', on_click=processa_pdf)
+st.sidebar.button('Enviar click', key=bt_enviar_click, on_click=processa_pdf)
    
 @st.cache
 def fetch_and_clean_data():
