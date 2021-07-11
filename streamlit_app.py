@@ -12,11 +12,12 @@ st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 container = st.beta_container()
 container.write("This is inside the container")
 st.write("This is outside the container")
+container.write("This is inside the container 2")
 
 def processa_pdf():
     st.write('PDF processado')
     st.sidebar.write('PDF processado sidebar')
-    container.write("PDF processado no container")
+    container.write("This is inside the container 3")
     return
 
 file_match = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
