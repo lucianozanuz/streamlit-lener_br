@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
-import pdftotext
+import PyPDF2 
 
 st.write(st.session_state)
 
@@ -24,10 +24,14 @@ def processa_pdf():
 
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 if uploaded_file is not None:
-   # To read file as bytes:
-   bytes_data = uploaded_file.getvalue()
-   st.write(bytes_data)
+    # creating a pdf file object 
+    pdfFileObj = open(uploaded_file, 'rb') 
 
+    # creating a pdf reader object 
+    pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
+
+    # printing number of pages in pdf file 
+    print(pdfReader.numPages)
  
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
