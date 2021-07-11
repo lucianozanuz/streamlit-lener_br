@@ -18,6 +18,12 @@ if st.sidebar.button('Enviar'):
 else:
    st.sidebar.write('Goodbye')
 
+if st.sidebar.button('Enviar cli', onclick='processa_pdf'):
+   st.sidebar.write('Why hello there')
+else:
+   st.sidebar.write('Goodbye')
+
+   
 @st.cache
 def fetch_and_clean_data():
     df = pd.read_csv('<some csv>')
