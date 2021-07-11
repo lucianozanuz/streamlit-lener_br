@@ -9,11 +9,6 @@ st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
 st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
-#st.sidebar.title('Reconhecimento de Entidades Nomeadas')
-#st.sidebar.header('Header da aplicação.')
-#st.sidebar.subheader('Subheader da aplicação')
-#st.sidebar.text('Texto: Upload excel files with only one column, even if you put multiple columns only the first one will be used')
-
 def processa_pdf():
     st.write('PDF processado')
     st.sidebar.write('PDF processado sidebar')
@@ -26,7 +21,16 @@ else:
    st.sidebar.write('Goodbye')
 
 st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
-   
+
+
+with st.beta_container():
+   st.write("This is inside the container")
+
+   # You can call any Streamlit command, including custom components:
+   st.bar_chart(np.random.randn(50, 3))
+
+st.write("This is outside the container")
+
 @st.cache
 def fetch_and_clean_data():
     df = pd.read_csv('<some csv>')
