@@ -4,9 +4,6 @@ import streamlit as st
 
 # Add a title
 st.title('Título da aplicação')
-# Add some text
-st.text('Texto')
-
 st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
 st.text('Texto: Upload excel files with only one column, even if you put multiple columns only the first one will be used')
@@ -26,8 +23,9 @@ st.write("Outside the form")
 
 
 
-file_lookup = st.file_uploader("Lookup list", help="List with values to be matched, in the Left-join that's the left side")
-file_match = st.file_uploader("Match list", help="List with values to match with, in the Left-join that's the right side")
+file_lookup = st.file_uploader("Petição inicial em PDF", help="List with values to be matched, in the Left-join that's the left side")
+
+file_match = st.sidebar.file_uploader("Petição inicial em PDF sidebar", help="List with values to match with, in the Left-join that's the right side")
 
 
 
