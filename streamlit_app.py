@@ -26,6 +26,10 @@ if uploaded_file is not None:
    bytes_data = uploaded_file.getvalue()
    st.write(bytes_data)
 
+    # To convert to a string based IO:
+    stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+    st.write(stringio)
+
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
 #else:
