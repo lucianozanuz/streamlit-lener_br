@@ -9,9 +9,13 @@ from spacy import displacy
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
-nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
-#modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
-#tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+@st.cache
+def carrega_modelo():
+    nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
+    modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
+    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+
+carrega_modelo()
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
           "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
@@ -23,9 +27,10 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
 options = {"colors": colors}
 
 def mostra_ner(texto, aggregation_strategy):
-    #ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
+    st.write(aggregation_strategy)
+    ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
     #ner = pipeline("ner", model=nome_modelo_treinado, aggregation_strategy=aggregation_strategy)
-    ner = pipeline("ner", aggregation_strategy=aggregation_strategy)
+    #ner = pipeline("ner", aggregation_strategy=aggregation_strategy)
     #data = ner(texto)
 
     #ents = []
@@ -101,4 +106,4 @@ Brasilia(DF), 15 de Março de 2018.
 #mostra_ner(sequence, "average")
 #mostra_ner(sequence, "max")
 st.subheader('Análise NER')
-st.write( mostra_ner(txt, 'average'))
+st.write(mostra_ner(txt, 'average'))
