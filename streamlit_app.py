@@ -9,10 +9,9 @@ from spacy import displacy
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
-nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
-
-modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
-tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+#nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
+#modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
+#tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
           "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
@@ -25,17 +24,17 @@ options = {"colors": colors}
 
 def mostra_ner(texto, aggregation_strategy):
     st.write('aqui1')
-    ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
-    data = ner(texto)
+    #ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
+    #data = ner(texto)
 
-    ents = []
-    for item in data:
-      item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
-      ents.append(item);
+    #ents = []
+    #for item in data:
+    #  item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
+    #  ents.append(item);
 
-    ex = [{"text": texto,
-          "ents": ents,
-          "title": None}]
+    #ex = [{"text": texto,
+    #      "ents": ents,
+    #      "title": None}]
     st.write('aqui2')
     return texto
     #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
