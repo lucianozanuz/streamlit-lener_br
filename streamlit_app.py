@@ -28,9 +28,9 @@ options = {"colors": colors}
 def mostra_ner(texto, aggregation_strategy):
     st.write(aggregation_strategy)
     st.write('aqui')
-    st.write(modelo_treinado)
-    st.write('aqui2')
     nome_modelo, modelo, tokenizer = carrega_modelo()
+    st.write(nome_modelo, modelo, tokenizer)
+    st.write('aqui2')
     ner = pipeline("ner", model=modelo, tokenizer=tokenizer, aggregation_strategy=aggregation_strategy)
     #ner = pipeline("ner", model=nome_modelo, aggregation_strategy=aggregation_strategy)
     #ner = pipeline("ner", aggregation_strategy=aggregation_strategy)
