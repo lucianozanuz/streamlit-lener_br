@@ -30,6 +30,28 @@ st.write(data)
 
 
 
+#txt = st.text_area('Text to analyze', '''
+#    It was the best of times, it was the worst of times, it was
+#    the age of wisdom, it was the age of foolishness, it was
+#    the epoch of belief, it was the epoch of incredulity, it
+#    was the season of Light, it was the season of Darkness, it
+#    was the spring of hope, it was the winter of despair, (...)
+#    ''')
+
+txt = st.text_area('Text to analyze', '''
+A C Ó R D Ã O
+Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
+Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
+Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
+Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
+em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
+PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
+Brasilia(DF), 15 de Março de 2018.
+''')
+
+data = query(txt)
+st.write(data)
+
 
 
 
@@ -42,6 +64,8 @@ pipeline = get_ner_pipeline()
 st.write(pipeline.model)
 st.write(pipeline.model.config)
 st.write(pipeline("Meu nome é Luciano Zanuz"))
+
+
 
 
 
@@ -121,24 +145,10 @@ st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 #
 #st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
 
-#txt = st.text_area('Text to analyze', '''
-#    It was the best of times, it was the worst of times, it was
-#    the age of wisdom, it was the age of foolishness, it was
-#    the epoch of belief, it was the epoch of incredulity, it
-#    was the season of Light, it was the season of Darkness, it
-#    was the spring of hope, it was the winter of despair, (...)
-#    ''')
 
-txt = st.text_area('Text to analyze', '''
-A C Ó R D Ã O
-Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
-Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
-Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
-Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
-em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
-PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
-Brasilia(DF), 15 de Março de 2018.
-''')
+
+
+
 
 #mostra_ner(sequence, "simple")
 #mostra_ner(sequence, "first")
