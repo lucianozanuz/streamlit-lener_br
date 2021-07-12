@@ -1,18 +1,18 @@
-import pandas as pd
-import numpy as np
 import streamlit as st
 
+import PyPDF2 
+from PyPDF2 import PdfFileWriter, PdfFileReader
+
+import spacy
+from spacy import displacy
+
+import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
 nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
 
 modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
 tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
-
-
-
-import spacy
-from spacy import displacy
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
           "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
@@ -37,15 +37,6 @@ def mostra_ner(texto, aggregation_strategy):
           "title": None}]
     displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
 
-
-          
-
-          
-          
-
-import PyPDF2 
-from PyPDF2 import PdfFileWriter, PdfFileReader
-
 st.write(st.session_state)
 
 st.title('Reconhecimento de Entidades Nomeadas')
@@ -53,38 +44,40 @@ st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
 st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
-    
-"""
-container = st.beta_container()
-container.write("This is inside the container")
-st.write("This is outside the container")
-container.write("This is inside the container 2")
 
-def processa_pdf():
-    st.write('PDF processado')
-    st.sidebar.write('PDF processado sidebar')
-    container.write("This is inside the container 3")
-    return
 
-uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
-if uploaded_file is not None:
-    bytes_data = uploaded_file.getvalue()
-    
-    # creating a pdf file object 
-    pdfFileObj = open(bytes_data, 'rb') 
 
-    # creating a pdf reader object 
-    pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
 
-    # printing number of pages in pdf file 
-    print(pdfReader.numPages)
-""" 
+#container = st.beta_container()
+#container.write("This is inside the container")
+#st.write("This is outside the container")
+#container.write("This is inside the container 2")
+#
+#def processa_pdf():
+#    st.write('PDF processado')
+#    st.sidebar.write('PDF processado sidebar')
+#    container.write("This is inside the container 3")
+#    return
+#
+#uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+#if uploaded_file is not None:
+#    bytes_data = uploaded_file.getvalue()
+#    
+#    # creating a pdf file object 
+#    pdfFileObj = open(bytes_data, 'rb') 
+#
+#    # creating a pdf reader object 
+#    pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
+#
+#    # printing number of pages in pdf file 
+#    print(pdfReader.numPages)
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
 #else:
 #   st.sidebar.write('Goodbye')
-
+#
+#st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
 
 #txt = st.text_area('Text to analyze', '''
 #    It was the best of times, it was the worst of times, it was
@@ -110,8 +103,6 @@ Brasilia(DF), 15 de Março de 2018.
 #mostra_ner(sequence, "average")
 #mostra_ner(sequence, "max")
 st.write('Análise NER:', mostra_ner(txt, 'average'))
-
-st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
 
 @st.cache
 def fetch_and_clean_data():
