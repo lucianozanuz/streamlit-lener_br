@@ -53,11 +53,11 @@ st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 #st.write("This is outside the container")
 #container.write("This is inside the container 2")
 #
-def processa_pdf():
-    st.write('PDF processado')
-    st.sidebar.write('PDF processado sidebar')
-    #container.write("This is inside the container 3")
-    return
+#def processa_pdf():
+#    st.write('PDF processado')
+#    st.sidebar.write('PDF processado sidebar')
+#    container.write("This is inside the container 3")
+#    return
 #
 #uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 #if uploaded_file is not None:
@@ -103,9 +103,3 @@ Brasilia(DF), 15 de Março de 2018.
 #mostra_ner(sequence, "average")
 #mostra_ner(sequence, "max")
 st.write('Análise NER:', mostra_ner(txt, 'average'))
-
-@st.cache
-def fetch_and_clean_data():
-    df = pd.read_csv('<some csv>')
-    # do some cleaning
-    return df
