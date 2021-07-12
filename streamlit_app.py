@@ -14,8 +14,7 @@ def carrega_modelo():
     nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
     tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
-
-carrega_modelo()
+    return nome_modelo_treinado, modelo_treinado, tokenizer_treinado
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
           "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
@@ -31,8 +30,9 @@ def mostra_ner(texto, aggregation_strategy):
     st.write('aqui')
     st.write(modelo_treinado)
     st.write('aqui2')
-    ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
-    #ner = pipeline("ner", model=nome_modelo_treinado, aggregation_strategy=aggregation_strategy)
+    nome_modelo, modelo, tokenizer = carrega_modelo()
+    ner = pipeline("ner", model=modelo, tokenizer=tokenizer, aggregation_strategy=aggregation_strategy)
+    #ner = pipeline("ner", model=nome_modelo, aggregation_strategy=aggregation_strategy)
     #ner = pipeline("ner", aggregation_strategy=aggregation_strategy)
     #data = ner(texto)
 
