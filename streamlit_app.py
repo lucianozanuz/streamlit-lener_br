@@ -12,7 +12,7 @@ from transformers import pipeline, AutoModelForTokenClassification, AutoTokenize
 
 
 @st.cache
-def get_ner_pipeline() -> Pipeline:
+def get_ner_pipeline():
     ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
     return ner
 
