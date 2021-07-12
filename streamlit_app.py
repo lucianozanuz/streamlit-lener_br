@@ -9,7 +9,6 @@ from spacy import displacy
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
-st.write("api_token:", st.secrets["api_token"])
 
 
 
@@ -17,8 +16,8 @@ import json
 import requests
 
 API_URL = "https://api-inference.huggingface.co/models/Luciano/bertimbau-large-lener_br"
-API_TOKEN = api_token
-headers = {"Authorization": f"Bearer {api_token}"}
+API_TOKEN = st.secrets["api_token"]
+headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
 def query(payload):
     data = json.dumps(payload)
@@ -26,7 +25,7 @@ def query(payload):
     return json.loads(response.content.decode("utf-8"))
 
 data = query("Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil")
-data
+st.write(data)
 
 
 
