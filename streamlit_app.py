@@ -11,15 +11,15 @@ from transformers import pipeline, AutoModelForTokenClassification, AutoTokenize
 
 
 
-@st.cache
-def get_ner_pipeline() -> Pipeline:
-    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
-    return ner
-
-pipeline = get_ner_pipeline()
-st.write(pipeline.model)
-st.write(pipeline.model.config)
-st.write(pipeline("Meu nome é Luciano Zanuz")
+#@st.cache
+#def get_ner_pipeline() -> Pipeline:
+#    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
+#    return ner
+#
+#pipeline = get_ner_pipeline()
+#st.write(pipeline.model)
+#st.write(pipeline.model.config)
+#st.write(pipeline("Meu nome é Luciano Zanuz")
 
 
 
