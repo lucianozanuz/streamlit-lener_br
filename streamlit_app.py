@@ -23,7 +23,6 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
 options = {"colors": colors}
 
 def mostra_ner(texto, aggregation_strategy):
-    st.write('aqui1')
     #ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
     #data = ner(texto)
 
@@ -35,7 +34,6 @@ def mostra_ner(texto, aggregation_strategy):
     #ex = [{"text": texto,
     #      "ents": ents,
     #      "title": None}]
-    st.write('aqui2')
     return texto
     #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
 
