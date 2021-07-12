@@ -9,6 +9,22 @@ from spacy import displacy
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
+
+
+@st.cache
+def get_ner_pipeline() -> Pipeline:
+    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
+    return ner
+
+pipeline = get_ner_pipeline()
+st.write(pipeline.model)
+st.write(pipeline.model.config)
+st.write(pipeline("Meu nome é Luciano Zanuz")
+
+         
+         
+         
+
 @st.cache
 def carrega_modelo():
     nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
