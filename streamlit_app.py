@@ -9,6 +9,7 @@ from spacy import displacy
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
+st.write("api_token:", st.secrets["api_token"])
 
 
 
