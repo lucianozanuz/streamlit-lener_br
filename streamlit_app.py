@@ -9,11 +9,15 @@ from spacy import displacy
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
-
-
-
 import json
 import requests
+
+st.write(st.session_state)
+
+st.title('Reconhecimento de Entidades Nomeadas')
+st.header('Header da aplicação.')
+st.subheader('Subheader da aplicação')
+st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
 API_URL = "https://api-inference.huggingface.co/models/Luciano/bertimbau-large-lener_br"
 API_TOKEN = st.secrets["api_token"]
@@ -55,15 +59,15 @@ st.write(data)
 
 
 
-@st.cache
-def get_ner_pipeline():
-    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
-    return ner
-
-pipeline = get_ner_pipeline()
-st.write(pipeline.model)
-st.write(pipeline.model.config)
-st.write(pipeline("Meu nome é Luciano Zanuz"))
+#@st.cache
+#def get_ner_pipeline():
+#    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
+#    return ner
+#
+#pipeline = get_ner_pipeline()
+#st.write(pipeline.model)
+#st.write(pipeline.model.config)
+#st.write(pipeline("Meu nome é Luciano Zanuz"))
 
 
 
@@ -107,12 +111,6 @@ def mostra_ner(texto, aggregation_strategy):
     return texto
     #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
 
-st.write(st.session_state)
-
-st.title('Reconhecimento de Entidades Nomeadas')
-st.header('Header da aplicação.')
-st.subheader('Subheader da aplicação')
-st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
 #container = st.beta_container()
 #container.write("This is inside the container")
@@ -154,5 +152,5 @@ st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 #mostra_ner(sequence, "first")
 #mostra_ner(sequence, "average")
 #mostra_ner(sequence, "max")
-st.subheader('Análise NER')
-st.write(mostra_ner(txt, 'average'))
+#st.subheader('Análise NER')
+#st.write(mostra_ner(txt, 'average'))
