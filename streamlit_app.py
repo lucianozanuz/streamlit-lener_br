@@ -31,9 +31,6 @@ def query(payload):
 data = query("Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil")
 st.write(data)
 
-
-
-
 #txt = st.text_area('Text to analyze', '''
 #    It was the best of times, it was the worst of times, it was
 #    the age of wisdom, it was the age of foolishness, it was
