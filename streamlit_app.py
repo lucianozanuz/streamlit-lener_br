@@ -21,9 +21,8 @@ st.write(pipeline.model)
 st.write(pipeline.model.config)
 st.write(pipeline("Meu nome é Luciano Zanuz")
 
-         
-         
-         
+
+
 
 @st.cache
 def carrega_modelo():
