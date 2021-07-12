@@ -37,6 +37,7 @@ def mostra_ner(texto, aggregation_strategy):
           "ents": ents,
           "title": None}]
     st.write('aqui2')
+    return texto
     #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
 
 st.write(st.session_state)
