@@ -24,12 +24,12 @@ st.write(pipeline("Meu nome é Luciano Zanuz")
 
 
 
-@st.cache
-def carrega_modelo():
-    nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
-    modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
-    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
-    return nome_modelo_treinado, modelo_treinado, tokenizer_treinado
+#@st.cache
+#def carrega_modelo():
+#    nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
+#    modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
+#    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+#    return nome_modelo_treinado, modelo_treinado, tokenizer_treinado
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
           "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
