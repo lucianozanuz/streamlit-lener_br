@@ -26,7 +26,6 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
 options = {"colors": colors}
 
 def mostra_ner(texto, aggregation_strategy):
-    st.write(aggregation_strategy)
     st.write('aqui')
     nome_modelo, modelo, tokenizer = carrega_modelo()
     st.write(nome_modelo, modelo, tokenizer)
