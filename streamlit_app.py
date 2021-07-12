@@ -24,7 +24,8 @@ options = {"colors": colors}
 
 def mostra_ner(texto, aggregation_strategy):
     #ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
-    ner = pipeline("ner", model=nome_modelo_treinado, aggregation_strategy=aggregation_strategy)
+    #ner = pipeline("ner", model=nome_modelo_treinado, aggregation_strategy=aggregation_strategy)
+    ner = pipeline("ner", aggregation_strategy=aggregation_strategy)
     #data = ner(texto)
 
     #ents = []
