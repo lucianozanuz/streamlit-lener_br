@@ -11,6 +11,28 @@ from transformers import pipeline, AutoModelForTokenClassification, AutoTokenize
 
 
 
+
+import json
+import requests
+
+API_URL = "https://api-inference.huggingface.co/models/Luciano/bertimbau-large-lener_br"
+API_TOKEN = api_token
+headers = {"Authorization": f"Bearer {api_token}"}
+
+def query(payload):
+    data = json.dumps(payload)
+    response = requests.request("POST", API_URL, headers=headers, data=data)
+    return json.loads(response.content.decode("utf-8"))
+
+data = query("Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil")
+data
+
+
+
+
+
+
+
 @st.cache
 def get_ner_pipeline():
     ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
@@ -19,7 +41,7 @@ def get_ner_pipeline():
 pipeline = get_ner_pipeline()
 st.write(pipeline.model)
 st.write(pipeline.model.config)
-st.write(pipeline("Meu nome é Luciano Zanuz")
+st.write(pipeline("Meu nome é Luciano Zanuz"))
 
 
 
