@@ -4,15 +4,12 @@ import streamlit as st
 
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
-import PyPDF2 
-from PyPDF2 import PdfFileWriter, PdfFileReader
+nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
 
-st.write(st.session_state)
+modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
+tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
 
-st.title('Reconhecimento de Entidades Nomeadas')
-st.header('Header da aplicação.')
-st.subheader('Subheader da aplicação')
-st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
+
 
 import spacy
 from spacy import displacy
@@ -39,6 +36,23 @@ def mostra_ner(texto, aggregation_strategy):
           "ents": ents,
           "title": None}]
     displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
+
+
+          
+
+          
+          
+
+import PyPDF2 
+from PyPDF2 import PdfFileWriter, PdfFileReader
+
+st.write(st.session_state)
+
+st.title('Reconhecimento de Entidades Nomeadas')
+st.header('Header da aplicação.')
+st.subheader('Subheader da aplicação')
+st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
+
     
 """
 container = st.beta_container()
@@ -71,8 +85,6 @@ if uploaded_file is not None:
 #else:
 #   st.sidebar.write('Goodbye')
 
-title = st.text_input('Texto a ser processado', 'Life of Brian')
-st.write('The current movie title is', title)
 
 #txt = st.text_area('Text to analyze', '''
 #    It was the best of times, it was the worst of times, it was
