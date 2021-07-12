@@ -100,4 +100,5 @@ Brasilia(DF), 15 de Março de 2018.
 #mostra_ner(sequence, "first")
 #mostra_ner(sequence, "average")
 #mostra_ner(sequence, "max")
-st.write('Análise NER:', mostra_ner(txt, 'average'))
+st.subheader('Análise NER')
+st.write( mostra_ner(txt, 'average'))
