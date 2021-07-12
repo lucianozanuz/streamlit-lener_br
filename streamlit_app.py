@@ -35,7 +35,8 @@ def mostra_ner(texto, aggregation_strategy):
     ex = [{"text": texto,
           "ents": ents,
           "title": None}]
-    displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
+    st.write(texto)
+    #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
 
 st.write(st.session_state)
 
@@ -43,10 +44,6 @@ st.title('Reconhecimento de Entidades Nomeadas')
 st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
 st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
-
-
-
-
 
 #container = st.beta_container()
 #container.write("This is inside the container")
