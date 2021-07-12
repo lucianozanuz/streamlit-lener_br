@@ -28,7 +28,9 @@ def query(payload):
     response = requests.request("POST", API_URL, headers=headers, data=data)
     return json.loads(response.content.decode("utf-8"))
 
-data = query("Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil")
+data = query("Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil.")
+st.write(data)
+data = query("Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil.")
 st.write(data)
 
 #txt = st.text_area('Text to analyze', '''
