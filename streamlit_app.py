@@ -9,7 +9,7 @@ from spacy import displacy
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
-#nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
+nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
 #modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
 #tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
 
@@ -24,6 +24,7 @@ options = {"colors": colors}
 
 def mostra_ner(texto, aggregation_strategy):
     #ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
+    ner = pipeline("ner", model=nome_modelo_treinado, aggregation_strategy=aggregation_strategy)
     #data = ner(texto)
 
     #ents = []
