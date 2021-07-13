@@ -70,7 +70,7 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     #return ex
     #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
-    return displacy.render(ex, style="ent", options=options, manual=True)    
+    return displacy.serve(ex, style="ent", options=options, manual=True)    
     #spacy_streamlit.visualize_ner(ex)
 
 
