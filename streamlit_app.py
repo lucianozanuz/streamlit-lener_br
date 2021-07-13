@@ -99,7 +99,7 @@ ex = [{"text": texto,
       "ents": ents,
       "title": None}]
 st.write("aqui)
-displacy.render(ex, style="ent", options=options, manual=True)
+displacy.serve(ex, style="ent", options=options, manual=True)
 st.write("aqui2)
 
 
