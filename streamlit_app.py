@@ -74,9 +74,7 @@ def mostra_ner(texto, ajusta_retorno=False):
 #    was the spring of hope, it was the winter of despair, (...)
 #    ''')
 
-txt = st.text_area('Text to analyze', 
-'''
-A C Ó R D Ã O
+txt = st.text_area('Texto a ser analisado', '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
 Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
