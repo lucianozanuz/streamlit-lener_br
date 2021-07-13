@@ -68,6 +68,27 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
+
+
+
+txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
+data = query(txt)
+st.write(data)
+txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
+data = query(txt)
+st.write(data)
+data = ajusta_retorno_api(data)
+st.write(data)
+st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
+st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
+
+
+
+
+
+
+
+
 #txt = st.text_area('Texto a ser analisado', '''It was the best of times, it was the worst of times, it was
 #    the age of wisdom, it was the age of foolishness, it was
 #    the epoch of belief, it was the epoch of incredulity, it
@@ -89,23 +110,6 @@ data = query(txt)
 st.write(data)
 data = ajusta_retorno_api(data)
 st.write(data)
-
-
-
-
-
-
-txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
-data = query(txt)
-st.write(data)
-txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
-data = query(txt)
-st.write(data)
-data = ajusta_retorno_api(data)
-st.write(data)
-st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
-st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
-
 
 
 
