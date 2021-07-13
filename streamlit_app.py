@@ -95,7 +95,7 @@ for item in data:
   item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
   ents.append(item);
 
-ex = [{"text": texto,
+ex = [{"text": txt,
       "ents": ents,
       "title": None}]
 st.write("aqui")
