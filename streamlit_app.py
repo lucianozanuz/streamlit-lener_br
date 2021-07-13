@@ -50,7 +50,7 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
 options = {"colors": colors}
 
 def mostra_ner(texto, ajusta_retorno=False):
-    data = query({"inputs": texto, "options": {"wait_for_model": true}})
+    data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
     if("error" in data):
         return data["error"]
     #"error":"Model Luciano/bertimbau-large-lener_br is currently loading"
