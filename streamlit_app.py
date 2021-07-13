@@ -98,9 +98,9 @@ for item in data:
 ex = [{"text": texto,
       "ents": ents,
       "title": None}]
-st.write("aqui)
+st.write("aqui")
 displacy.serve(ex, style="ent", options=options, manual=True)
-st.write("aqui2)
+st.write("aqui2")
 
 
 
