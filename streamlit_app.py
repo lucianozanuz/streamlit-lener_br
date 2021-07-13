@@ -52,7 +52,7 @@ options = {"colors": colors}
 def mostra_ner(texto, ajusta_retorno=False):
     data = query({"inputs": texto})
     if("error" in data):
-        return data["error")
+        return data["error"]
     #"error":"Model Luciano/bertimbau-large-lener_br is currently loading"
                     
     if(ajusta_retorno):
