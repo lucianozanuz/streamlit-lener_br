@@ -67,7 +67,8 @@ def mostra_ner(texto, ajusta_retorno=False):
           "ents": ents,
           "title": None}]
     #return ex
-    return displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
+    #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
+    return displacy.render(ex, style="ent", options=options, manual=True)
 
 
     
