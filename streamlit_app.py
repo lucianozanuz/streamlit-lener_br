@@ -1,10 +1,10 @@
 import streamlit as st
 
-import PyPDF2 
-from PyPDF2 import PdfFileWriter, PdfFileReader
-
 import spacy
 from spacy import displacy
+
+import PyPDF2 
+from PyPDF2 import PdfFileWriter, PdfFileReader
 
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
@@ -18,9 +18,6 @@ st.title('Reconhecimento de Entidades Nomeadas')
 st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
 st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
-
-
-
 
 API_URL = "https://api-inference.huggingface.co/models/Luciano/bertimbau-large-lener_br"
 API_TOKEN = st.secrets["api_token"]
@@ -42,8 +39,6 @@ def ajusta_retorno_api(data):
       new_data.append(item)
       new_i +=1
   return new_data
-
-
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
           "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
@@ -68,9 +63,39 @@ def mostra_ner(texto, ajusta_retorno=False):
           "ents": ents,
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
-    
 
-    
+
+
+#txt = st.text_area('Text to analyze', '''
+#    It was the best of times, it was the worst of times, it was
+#    the age of wisdom, it was the age of foolishness, it was
+#    the epoch of belief, it was the epoch of incredulity, it
+#    was the season of Light, it was the season of Darkness, it
+#    was the spring of hope, it was the winter of despair, (...)
+#    ''')
+
+txt = st.text_area('Text to analyze', 
+'''
+A C Ó R D Ã O
+Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
+Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
+Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
+Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
+em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
+PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
+Brasilia(DF), 15 de Março de 2018.
+''')
+
+data = query(txt)
+st.write(data)
+data = ajusta_retorno_api(data)
+st.write(data)
+
+
+
+
+
+
 txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
 data = query(txt)
 st.write(data)
@@ -79,8 +104,7 @@ data = query(txt)
 st.write(data)
 data = ajusta_retorno_api(data)
 st.write(data)
-st.write(mostra_ner(txt, ajusta_retorno=False))
-st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
+st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
@@ -106,32 +130,6 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
 
-
-
-
-#txt = st.text_area('Text to analyze', '''
-#    It was the best of times, it was the worst of times, it was
-#    the age of wisdom, it was the age of foolishness, it was
-#    the epoch of belief, it was the epoch of incredulity, it
-#    was the season of Light, it was the season of Darkness, it
-#    was the spring of hope, it was the winter of despair, (...)
-#    ''')
-
-txt = st.text_area('Text to analyze', '''
-A C Ó R D Ã O
-Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
-Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
-Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
-Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
-em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
-PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
-Brasilia(DF), 15 de Março de 2018.
-''')
-
-data = query(txt)
-st.write(data)
-data = ajusta_retorno_api(data)
-st.write(data)
 
 
 
