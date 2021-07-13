@@ -21,6 +21,16 @@ st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
 
 
+import spacy_streamlit
+
+models = ["en_core_web_sm", "/path/to/model"]
+default_text = "Sundar Pichai is the CEO of Google."
+visualizers = ["ner", "textcat"]
+spacy_streamlit.visualize(models, default_text, visualizers)
+
+
+
+
 API_URL = "https://api-inference.huggingface.co/models/Luciano/bertimbau-large-lener_br"
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
