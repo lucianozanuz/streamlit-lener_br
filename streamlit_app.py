@@ -66,8 +66,8 @@ def mostra_ner(texto, ajusta_retorno=False):
     ex = [{"text": texto,
           "ents": ents,
           "title": None}]
-    return ex
-    #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
+    #return ex
+    return displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
 
 
     
