@@ -3,3 +3,4 @@ PyPDF2
 torch
 transformers
 spacy
+spacy-streamlit --pre
