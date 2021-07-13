@@ -50,7 +50,8 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
 options = {"colors": colors}
 
 def mostra_ner(texto, ajusta_retorno=False):
-    data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
+    #data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
+    data = query({"inputs": texto})
     if("error" in data):
         return data["error"]
     #"error":"Model Luciano/bertimbau-large-lener_br is currently loading"
@@ -105,7 +106,7 @@ em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 ''')
-data = query(txt)
+data = query({"inputs": txt})
 if("error" in data):
     st.write(data["error"])
 st.write(data)
