@@ -70,7 +70,7 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     #return ex
     #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
-    return displacy.serve(ex, style="ent", options=options, manual=True)    
+    return displacy.render(ex, style="ent", options=options, manual=True)    
     #spacy_streamlit.visualize_ner(ex)
 
 
@@ -85,6 +85,24 @@ data = ajusta_retorno_api(data)
 st.write(data)
 st.write(mostra_ner(txt, ajusta_retorno=False))
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
+
+
+data = query({"inputs": txt})
+data = ajusta_retorno_api(data)
+
+ents = []
+for item in data:
+  item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
+  ents.append(item);
+
+ex = [{"text": texto,
+      "ents": ents,
+      "title": None}]
+displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
+
+
+
+
 
 
 
