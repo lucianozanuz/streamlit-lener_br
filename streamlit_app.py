@@ -23,10 +23,26 @@ API_URL = "https://api-inference.huggingface.co/models/Luciano/bertimbau-large-l
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
+def ajusta_retorno_api(data):
+  new_data = []
+  new_i = -1
+  for i, item in enumerate(data):
+    if(item["word"][:2] == "##"):
+      new_data[new_i]["word"] += item["word"][2:]
+      new_data[new_i]["end"] = item["end"]
+    else:
+      new_data.append(item)
+      new_i +=1
+  return new_data
+
 def query(payload):
     data = json.dumps(payload)
     response = requests.request("POST", API_URL, headers=headers, data=data)
     return json.loads(response.content.decode("utf-8"))
+
+data = query("Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil.")
+data = ajusta_retorno_api(data)
+st.write(data)
 
 data = query("Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil.")
 st.write(data)
