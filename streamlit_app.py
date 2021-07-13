@@ -98,7 +98,9 @@ for item in data:
 ex = [{"text": texto,
       "ents": ents,
       "title": None}]
-displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
+st.write("aqui)
+displacy.render(ex, style="ent", options=options, manual=True)
+st.write("aqui2)
 
 
 
