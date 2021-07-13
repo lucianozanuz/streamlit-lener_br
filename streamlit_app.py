@@ -19,9 +19,16 @@ st.header('Header da aplicação.')
 st.subheader('Subheader da aplicação')
 st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
+
+
 API_URL = "https://api-inference.huggingface.co/models/Luciano/bertimbau-large-lener_br"
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
+
+def query(payload):
+    data = json.dumps(payload)
+    response = requests.request("POST", API_URL, headers=headers, data=data)
+    return json.loads(response.content.decode("utf-8"))
 
 def ajusta_retorno_api(data):
   new_data = []
@@ -35,17 +42,49 @@ def ajusta_retorno_api(data):
       new_i +=1
   return new_data
 
-def query(payload):
-    data = json.dumps(payload)
-    response = requests.request("POST", API_URL, headers=headers, data=data)
-    return json.loads(response.content.decode("utf-8"))
 
-data = query("Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil.")
+
+colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
+          "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
+          "LOCAL": "radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)",
+          "ORGANIZACAO": "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)",
+          "LEGISLACAO": "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)",
+          "JURISPRUDENCIA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)"
+          }
+options = {"colors": colors}
+
+def mostra_ner(texto, ajusta_retorno=False):
+    data = query({"inputs": texto})
+    if(ajusta_retorno):
+      data = ajusta_retorno_api(data)
+
+    ents = []
+    for item in data:
+      item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
+      ents.append(item);
+
+    ex = [{"text": texto,
+          "ents": ents,
+          "title": None}]
+    return texto
+    #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
+
+
+    
+txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
+data = query(txt)
 st.write(data)
-data = query("Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil.")
+txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
+data = query(txt)
 st.write(data)
 data = ajusta_retorno_api(data)
 st.write(data)
+st.write(mostra_ner(txt, ajusta_retorno=False))
+st.write(mostra_ner(txt, ajusta_retorno=True))
+
+
+
+
 
 #txt = st.text_area('Text to analyze', '''
 #    It was the best of times, it was the worst of times, it was
@@ -74,6 +113,13 @@ st.write(data)
 
 
 
+
+
+
+
+
+
+
 #@st.cache
 #def get_ner_pipeline():
 #    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
@@ -96,35 +142,8 @@ st.write(data)
 #    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
 #    return nome_modelo_treinado, modelo_treinado, tokenizer_treinado
 
-colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
-          "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
-          "LOCAL": "radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)",
-          "ORGANIZACAO": "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)",
-          "LEGISLACAO": "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)",
-          "JURISPRUDENCIA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)"
-          }
-options = {"colors": colors}
+    
 
-def mostra_ner(texto, aggregation_strategy):
-    st.write('aqui')
-    #nome_modelo, modelo, tokenizer = carrega_modelo()
-    #st.write(nome_modelo, modelo, tokenizer)
-    st.write('aqui2')
-    ner = pipeline("ner", model=modelo, tokenizer=tokenizer, aggregation_strategy=aggregation_strategy)
-    #ner = pipeline("ner", model=nome_modelo, aggregation_strategy=aggregation_strategy)
-    #ner = pipeline("ner", aggregation_strategy=aggregation_strategy)
-    #data = ner(texto)
-
-    #ents = []
-    #for item in data:
-    #  item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
-    #  ents.append(item);
-
-    #ex = [{"text": texto,
-    #      "ents": ents,
-    #      "title": None}]
-    return texto
-    #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
 
 
 #container = st.beta_container()
