@@ -5,7 +5,6 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 
 import spacy
 from spacy import displacy
-import spacy_streamlit
 
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
@@ -68,11 +67,8 @@ def mostra_ner(texto, ajusta_retorno=False):
     ex = [{"text": texto,
           "ents": ents,
           "title": None}]
-    #return ex
-    #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
     return displacy.render(ex, style="ent", options=options, manual=True)    
-    #spacy_streamlit.visualize_ner(ex)
-
+    
 
     
 txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
@@ -85,22 +81,7 @@ data = ajusta_retorno_api(data)
 st.write(data)
 st.write(mostra_ner(txt, ajusta_retorno=False))
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
-
-
-data = query({"inputs": txt})
-data = ajusta_retorno_api(data)
-
-ents = []
-for item in data:
-  item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
-  ents.append(item);
-
-ex = [{"text": txt,
-      "ents": ents,
-      "title": None}]
-st.write("aqui")
-displacy.serve(ex, style="ent", options=options, manual=True)
-st.write("aqui2")
+st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
 
