@@ -70,8 +70,8 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     #return ex
     #displacy.render(ex, style="ent", options=options, jupyter=True, manual=True)
-    #return displacy.render(ex, style="ent", options=options, manual=True)    
-    spacy_streamlit.visualize_ner(ex)
+    return displacy.render(ex, style="ent", options=options, manual=True)    
+    #spacy_streamlit.visualize_ner(ex)
 
 
     
@@ -84,7 +84,7 @@ st.write(data)
 data = ajusta_retorno_api(data)
 st.write(data)
 st.write(mostra_ner(txt, ajusta_retorno=False))
-st.write(mostra_ner(txt, ajusta_retorno=True))
+st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
 
