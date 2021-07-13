@@ -105,9 +105,9 @@ em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 ''')
-st.write("aqui 1")
 data = query(txt)
-st.write("aqui 2")
+if("error" in data):
+    st.write(data["error"]_
 st.write(data)
 st.write("aqui 3")
 data = ajusta_retorno_api(data)
