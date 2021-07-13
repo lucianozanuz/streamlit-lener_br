@@ -97,19 +97,27 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 #    ''')
 
 txt = st.text_area('Texto a ser analisado', '''A C Ó R D Ã O
-    Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
-    Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
-    Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
-    Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
-    em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
-    PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
-    Brasilia(DF), 15 de Março de 2018.
-    ''')
-
+Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
+Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
+Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
+Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
+em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
+PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
+Brasilia(DF), 15 de Março de 2018.
+''')
+st.write("aqui 1")
 data = query(txt)
+st.write("aqui 2")
 st.write(data)
+st.write("aqui 3")
 data = ajusta_retorno_api(data)
+st.write("aqui 4")
 st.write(data)
+st.write("aqui 5")
+st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
+st.write("aqui 6")
+st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
+st.write("aqui 7")
 
 
 
