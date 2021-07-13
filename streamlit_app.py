@@ -107,7 +107,7 @@ Brasilia(DF), 15 de Março de 2018.
 ''')
 data = query(txt)
 if("error" in data):
-    st.write(data["error"]_
+    st.write(data["error"])
 st.write(data)
 st.write("aqui 3")
 data = ajusta_retorno_api(data)
