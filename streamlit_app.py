@@ -164,14 +164,14 @@ def carrega_modelo():
     modelo_treinado = ""
     tokenizer_treinado = ""
     #modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
-    #tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
     return nome_modelo_treinado, modelo_treinado, tokenizer_treinado
 st.write("aqui-2")
 nome_modelo_treinado, modelo_treinado, tokenizer_treinado = carrega_modelo()
 st.write("aqui-3")
 st.write(nome_modelo_treinado)
-#st.write(modelo_treinado)
-#st.write(tokenizer_treinado)
+st.write(modelo_treinado)
+st.write(tokenizer_treinado)
 
 
 #mostra_ner(sequence, "simple")
