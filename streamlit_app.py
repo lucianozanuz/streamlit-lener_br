@@ -163,7 +163,7 @@ def carrega_modelo(nome_modelo_treinado):
     modelo_treinado = ""
     tokenizer_treinado = ""
     #modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
-    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+    #tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
     return modelo_treinado, tokenizer_treinado
 st.write("aqui-2")
 modelo_treinado, tokenizer_treinado = carrega_modelo("Luciano/bertimbau-large-lener_br")
