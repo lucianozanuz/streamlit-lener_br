@@ -171,7 +171,7 @@ def carrega_tokenizer(nome_modelo_treinado):
     tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
     return tokenizer_treinado
 st.write("aqui-4")
-tokenizer_treinado = carrega_modelo(nome_modelo_treinado)
+tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 st.write("aqui-5")
 st.write(modelo_treinado)
 st.write(tokenizer_treinado)
