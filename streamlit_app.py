@@ -151,7 +151,8 @@ if(debug):
     st.write(data)
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
-nome_modelo_treinado = "Luciano/bertimbau-large-lener_br"
+#nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" 
+nome_modelo_treinado = modelo
 @st.cache
 def carrega_modelo(nome_modelo_treinado):
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
