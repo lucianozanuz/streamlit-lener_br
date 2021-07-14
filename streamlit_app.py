@@ -99,7 +99,7 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 #    was the spring of hope, it was the winter of despair, (...)
 #    ''')
 
-txt = st.text_area('Texto a ser analisado', height=200, '''A C Ó R D Ã O
+txt = st.text_area('Texto a ser analisado', '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
 Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
@@ -107,7 +107,7 @@ Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
 em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
-''')
+''', height=200)
 if(debug):
     data = query({"inputs": txt})
     if("error" in data):
