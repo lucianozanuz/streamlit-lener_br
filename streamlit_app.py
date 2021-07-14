@@ -24,8 +24,8 @@ st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
 modelo = st.radio(
     "Modelo treinado",
-    ('bertimbau-large-lener_br', 'bertimbau-base-lener_br'))
-API_URL = "https://api-inference.huggingface.co/models/Luciano/" + modelo
+    ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'))
+API_URL = "https://api-inference.huggingface.co/models/" + modelo
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
@@ -112,16 +112,6 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
 
-#text = st.text_area("Text to analyze", DEFAULT_TEXT, height=200)
-#doc = spacy_streamlit.process_text(spacy_model, text)
-
-#spacy_streamlit.visualize_ner(
-#    doc,
-#    labels=["PERSON", "DATE", "GPE"],
-#    show_table=False,
-#    title="Persons, dates and locations",
-#)
-#st.text(f"Analyzed using spaCy model {spacy_model}")
 
 
 
@@ -162,16 +152,16 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
 
-#container = st.beta_container()
-#container.write("This is inside the container")
-#st.write("This is outside the container")
-#container.write("This is inside the container 2")
-#
-#def processa_pdf():
-#    st.write('PDF processado')
-#    st.sidebar.write('PDF processado sidebar')
-#    container.write("This is inside the container 3")
-#    return
+container = st.beta_container()
+container.write("This is inside the container")
+st.write("This is outside the container")
+container.write("This is inside the container 2")
+
+def processa_pdf():
+    st.write('PDF processado')
+    st.sidebar.write('PDF processado sidebar')
+    container.write("This is inside the container 3")
+    return
 #
 #uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 #if uploaded_file is not None:
