@@ -171,7 +171,7 @@ if uploaded_file is not None:
     
 #    # creating a pdf file object 
 #    pdfFileObj = open(bytes_data, 'rb') 
-    st.write(pdfFileObj)
+#    st.write(pdfFileObj)
 
     # creating a pdf reader object 
     pdfReader = PyPDF2.PdfFileReader(bytes_data) 
