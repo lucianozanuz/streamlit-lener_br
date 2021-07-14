@@ -174,7 +174,7 @@ if uploaded_file is not None:
 #    st.write(pdfFileObj)
 
     # creating a pdf reader object 
-    pdfReader = PyPDF2.PdfFileReader(bytes_data) 
+    pdfReader = PyPDF2.PdfFileReader(uploaded_file) 
 #    pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
 #
 #    # printing number of pages in pdf file 
