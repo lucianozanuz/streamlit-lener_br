@@ -71,33 +71,16 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
-
-
-
-txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
-data = query(txt)
-st.write(data)
-txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
-data = query(txt)
-st.write(data)
-data = ajusta_retorno_api(data)
-st.write(data)
-st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
-st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
-
-
-
-
-
-
-
-
-#txt = st.text_area('Texto a ser analisado', '''It was the best of times, it was the worst of times, it was
-#    the age of wisdom, it was the age of foolishness, it was
-#    the epoch of belief, it was the epoch of incredulity, it
-#    was the season of Light, it was the season of Darkness, it
-#    was the spring of hope, it was the winter of despair, (...)
-#    ''')
+#txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
+#data = query(txt)
+#st.write(data)
+#txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
+#data = query(txt)
+#st.write(data)
+#data = ajusta_retorno_api(data)
+#st.write(data)
+#st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
+#st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 txt = st.text_area('Texto a ser analisado', '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
@@ -105,7 +88,8 @@ Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
 Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
 Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
 em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
-PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas. Brasilia(DF), 15 de Março de 2018.''', height=200)
+PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
+Brasilia(DF), 15 de Março de 2018.''', height=300)
 if(debug):
     data = query({"inputs": txt})
     if("error" in data):
@@ -113,7 +97,6 @@ if(debug):
     st.write(data)
     data = ajusta_retorno_api(data)
     st.write(data)
-st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
