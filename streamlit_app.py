@@ -185,7 +185,7 @@ if uploaded_file is not None:
     # printing number of pages in pdf file 
     st.write(pdfReader.numPages)
     #st.write(pdfReader.getPage(0))
-    st.write(pdfReader.getPage(0).extractText())
+    st.write(pdfReader.getPage(1).extractText())
     st.write("aqui-4")
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
