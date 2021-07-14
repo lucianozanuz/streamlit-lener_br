@@ -165,7 +165,8 @@ modelo_treinado = carrega_modelo(nome_modelo_treinado)
 st.write(modelo_treinado)
 
 st.write("aqui-1")
-@st.cache
+#@st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
+@st.cache(allow_output_mutation=True)
 def carrega_tokenizer(nome_modelo_treinado):
     tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
     return tokenizer_treinado
