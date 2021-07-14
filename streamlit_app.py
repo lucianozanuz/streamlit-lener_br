@@ -164,31 +164,10 @@ def processa_pdf():
 processa_pdf()
 
 uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
-st.write(uploaded_file)
 if uploaded_file is not None:
-    st.write(uploaded_file.name)
-    bytes_data = uploaded_file.getvalue()
-    
-    st.write("aqui-1")
-    # creating a pdf file object 
-    #pdfFileObj = open(bytes_data, 'rb') 
-    #st.write(pdfFileObj)
-
-    st.write("aqui-2")
-    # creating a pdf reader object 
-#    pdfReader = PyPDF2.PdfFileReader(uploaded_file) 
-#    pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
     pdfReader = PyPDF2.PdfFileReader(uploaded_file) 
-    st.write(pdfReader)
-    st.write("aqui-3")
-
-    # printing number of pages in pdf file 
     for page in pdfReader.pages:
         st.write(page.extractText())
-    st.write(pdfReader.numPages)
-    #st.write(pdfReader.getPage(0))
-    st.write(pdfReader.getPage(2).extractText())
-    st.write("aqui-4")
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
