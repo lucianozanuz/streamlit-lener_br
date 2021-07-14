@@ -107,51 +107,6 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#@st.cache
-#def get_ner_pipeline():
-#    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
-#    return ner
-#
-#pipeline = get_ner_pipeline()
-#st.write(pipeline.model)
-#st.write(pipeline.model.config)
-#st.write(pipeline("Meu nome é Luciano Zanuz"))
-
-
-
-
-
-
-#@st.cache
-#def carrega_modelo():
-#    nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
-#    modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
-#    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
-#    return nome_modelo_treinado, modelo_treinado, tokenizer_treinado
-
-    
-
-
-
 container = st.beta_container()
 #container.write("This is inside the container")
 #st.write("This is outside the container")
@@ -181,17 +136,40 @@ if(debug):
     data = ajusta_retorno_api(data)
     st.write(data)
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
-        
-#if st.sidebar.button('Enviar', key='bt_enviar'):
-#   st.sidebar.write('Why hello there')
-#else:
-#   st.sidebar.write('Goodbye')
+
+
+
+
+
+
+
+#@st.cache
+#def get_ner_pipeline():
+#    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
+#    return ner
 #
-#st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
+#pipeline = get_ner_pipeline()
+#st.write(pipeline.model)
+#st.write(pipeline.model.config)
+#st.write(pipeline("Meu nome é Luciano Zanuz"))
 
 
 
 
+
+st.write("aqui-1")
+@st.cache
+def carrega_modelo():
+    nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" # Modelo do Huggingface Hub
+    modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
+    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+    return nome_modelo_treinado, modelo_treinado, tokenizer_treinado
+st.write("aqui-2")
+nome_modelo_treinado, modelo_treinado, tokenizer_treinado = carrega_modelo()
+st.write("aqui-3")
+#st.write(nome_modelo_treinado)
+#st.write(modelo_treinado)
+#st.write(tokenizer_treinado)
 
 
 #mostra_ner(sequence, "simple")
@@ -200,3 +178,11 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 #mostra_ner(sequence, "max")
 #st.subheader('Análise NER')
 #st.write(mostra_ner(txt, 'average'))
+
+        
+#if st.sidebar.button('Enviar', key='bt_enviar'):
+#   st.sidebar.write('Why hello there')
+#else:
+#   st.sidebar.write('Goodbye')
+#
+#st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
