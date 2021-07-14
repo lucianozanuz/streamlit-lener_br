@@ -19,7 +19,7 @@ if(debug):
 st.title('Reconhecimento de Entidades Nomeadas')
 #st.header('Header da aplicação.')
 st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
-st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
+#st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 #st.write('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
 modelo = st.radio(
@@ -159,7 +159,7 @@ def carrega_modelo(nome_modelo_treinado):
 modelo_treinado = carrega_modelo(nome_modelo_treinado)
 
 #@st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
-@st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True) # Parâmetro necessário para não dar erro de hash
 def carrega_tokenizer(nome_modelo_treinado):
     tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
     return tokenizer_treinado
@@ -167,6 +167,9 @@ tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 
 txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
 
 txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
@@ -183,6 +186,33 @@ Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
 em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
+'''
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
+
+txt = '''
+EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
+REF.
+AUTOS Nº : 5000307-41.2020.8.21.5001
+OBJETO: AGRAVO DE INSTRUMENTO
+FACTA FINANCEIRA S. A., inscrita no CNPJ sob o n°
+15.581.638/0001-30, com sede na Rua dos Andradas nº 1409, 07º
+andar – Bairro Centro, Porto Alegre/RS, CEP 90020-011, irresignada
+com decisão proferida nos autos do processo nº: 5000307-
+41.2020.8.21.5001, em trâmite no 1º Juízo da 2ª Vara Cível do Foro
+Regional do Sarandi da Comarca de Porto Alegre/RS, intentado por
+CLARINDA MARQUES SOARES, já qualificado nos autos, vem,
+respeitosamente, com fulcro no artigo 1.015 do Novo Código de
+Processo Civil, interpor tempestivamente o presente
+                      AGRAVO DE INSTRUMENTO,
+conforme as razões que seguem em anexo, requerendo, desde já, que
+as mesmas sejam recebidas, processadas e levadas à apreciação de
+uma de suas Colendas Câmaras.
+Termos em que,
+Pede deferimento.
+Porto Alegre/RS, 17 de julho de 2020.
 '''
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
