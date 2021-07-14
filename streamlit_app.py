@@ -75,6 +75,20 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
+def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strategy):
+    ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
+    data = ner(texto)
+
+    ents = []
+    for item in data:
+      item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
+      ents.append(item);
+
+    ex = [{"text": texto,
+          "ents": ents,
+          "title": None}]
+    return displacy.render(ex, style="ent", options=options, manual=True)    
+
 #txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
 #data = query(txt)
 #st.write(data)
@@ -137,9 +151,29 @@ if(debug):
     st.write(data)
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
+nome_modelo_treinado = "Luciano/bertimbau-large-lener_br"
+@st.cache
+def carrega_modelo(nome_modelo_treinado):
+    modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
+    return modelo_treinado
+modelo_treinado = carrega_modelo(nome_modelo_treinado)
 
+#@st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
+@st.cache(allow_output_mutation=True)
+def carrega_tokenizer(nome_modelo_treinado):
+    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+    return tokenizer_treinado
+tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 
+st.write(ner_pipeline(txt, "simple"),unsafe_allow_html=True)
 
+#mostra_ner(sequence, "first")
+#mostra_ner(sequence, "average")
+#mostra_ner(sequence, "max")
+#st.subheader('Análise NER')
+#st.write(mostra_ner(txt, 'average'))
+
+        
 
 
 
@@ -154,38 +188,6 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 #st.write(pipeline("Meu nome é Luciano Zanuz"))
 
 
-
-
-nome_modelo_treinado = "Luciano/bertimbau-large-lener_br"
-@st.cache
-def carrega_modelo(nome_modelo_treinado):
-    modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
-    return modelo_treinado
-modelo_treinado = carrega_modelo(nome_modelo_treinado)
-st.write(modelo_treinado)
-
-st.write("aqui-1")
-#@st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
-@st.cache(allow_output_mutation=True)
-def carrega_tokenizer(nome_modelo_treinado):
-    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
-    return tokenizer_treinado
-st.write("aqui-2")
-tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
-st.write("aqui-3")
-st.write(tokenizer_treinado)
-st.write("aqui-4")
-
-
-
-#mostra_ner(sequence, "simple")
-#mostra_ner(sequence, "first")
-#mostra_ner(sequence, "average")
-#mostra_ner(sequence, "max")
-#st.subheader('Análise NER')
-#st.write(mostra_ner(txt, 'average'))
-
-        
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
 #else:
