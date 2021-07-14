@@ -171,6 +171,16 @@ if uploaded_file is not None:
         pdf_text += page.extractText()
         #st.write(page.extractText())
 st.write(pdf_text)
+txt = st.text_area('Texto a ser analisado', pdf_text, height=300)
+
+if(debug):
+    data = query({"inputs": txt})
+    if("error" in data):
+        st.write(data["error"])
+    st.write(data)
+    data = ajusta_retorno_api(data)
+    st.write(data)
+st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
         
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
