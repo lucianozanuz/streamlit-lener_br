@@ -162,6 +162,8 @@ def processa_pdf():
     st.sidebar.write('PDF processado sidebar')
     container.write("This is inside the container 3")
     return
+
+processa_pdf()
 #
 #uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 #if uploaded_file is not None:
