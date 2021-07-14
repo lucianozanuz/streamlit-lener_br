@@ -183,6 +183,8 @@ if uploaded_file is not None:
     st.write("aqui-3")
 
     # printing number of pages in pdf file 
+    for page in pdfReader.numPages:
+        st.write(page)
     st.write(pdfReader.numPages)
     #st.write(pdfReader.getPage(0))
     st.write(pdfReader.getPage(1).extractText())
