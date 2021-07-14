@@ -165,10 +165,11 @@ processa_pdf()
 
 uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 st.write(uploaded_file)
-st.write(uploaded_file.name)
-#if uploaded_file is not None:
-#    bytes_data = uploaded_file.getvalue()
-#    
+if uploaded_file is not None:
+    st.write(uploaded_file.name)
+    bytes_data = uploaded_file.getvalue()
+    
+    st.write(bytes_data)
 #    # creating a pdf file object 
 #    pdfFileObj = open(bytes_data, 'rb') 
 #
