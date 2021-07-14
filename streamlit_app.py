@@ -165,7 +165,13 @@ def carrega_tokenizer(nome_modelo_treinado):
     return tokenizer_treinado
 tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 
+st.write("aqui-1")
+txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+st.write("aqui-2")
+txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+st.write("aqui-3")
 
 #mostra_ner(sequence, "first")
 #mostra_ner(sequence, "average")
