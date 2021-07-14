@@ -18,8 +18,9 @@ if(debug):
 
 st.title('Reconhecimento de Entidades Nomeadas')
 st.header('Header da aplicação.')
-st.subheader('Subheader da aplicação')
+st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
+st.write('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
 API_URL = "https://api-inference.huggingface.co/models/Luciano/bertimbau-large-lener_br"
 API_TOKEN = st.secrets["api_token"]
