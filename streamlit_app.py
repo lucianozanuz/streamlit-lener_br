@@ -168,7 +168,6 @@ def carrega_modelo(nome_modelo_treinado):
 st.write("aqui-2")
 modelo_treinado, tokenizer_treinado = carrega_modelo("Luciano/bertimbau-large-lener_br")
 st.write("aqui-3")
-st.write(nome_modelo_treinado)
 st.write(modelo_treinado)
 st.write(tokenizer_treinado)
 
