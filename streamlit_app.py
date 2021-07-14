@@ -159,13 +159,12 @@ container.write("This is inside the container 2")
 
 def processa_pdf():
     st.write('PDF processado')
-    st.sidebar.write('PDF processado sidebar')
     container.write("This is inside the container 3")
     return
-
 processa_pdf()
-#
-#uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+
+uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+st.write(uploaded_file)
 #if uploaded_file is not None:
 #    bytes_data = uploaded_file.getvalue()
 #    
