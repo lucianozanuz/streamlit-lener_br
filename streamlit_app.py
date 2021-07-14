@@ -105,9 +105,7 @@ Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
 Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
 Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
 em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
-PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
-Brasilia(DF), 15 de Março de 2018.
-''', height=200)
+PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas. Brasilia(DF), 15 de Março de 2018.''', height=200)
 if(debug):
     data = query({"inputs": txt})
     if("error" in data):
