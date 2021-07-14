@@ -178,7 +178,7 @@ if uploaded_file is not None:
     # creating a pdf reader object 
 #    pdfReader = PyPDF2.PdfFileReader(uploaded_file) 
 #    pdfReader = PyPDF2.PdfFileReader(pdfFileObj) 
-     pdfReader = PyPDF2.PdfFileReader(uploaded_file.name) 
+    pdfReader = PyPDF2.PdfFileReader(uploaded_file.name) 
     st.write(pdfReader)
     st.write("aqui-3")
 #
