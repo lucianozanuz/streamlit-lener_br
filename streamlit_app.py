@@ -171,8 +171,8 @@ if uploaded_file is not None:
     
     st.write("aqui-1")
     # creating a pdf file object 
-    pdfFileObj = open(bytes_data, 'rb') 
-    st.write(pdfFileObj)
+    #pdfFileObj = open(bytes_data, 'rb') 
+    #st.write(pdfFileObj)
 
     st.write("aqui-2")
     # creating a pdf reader object 
