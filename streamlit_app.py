@@ -165,20 +165,27 @@ def carrega_tokenizer(nome_modelo_treinado):
     return tokenizer_treinado
 tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 
-st.write("aqui-1")
 txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-st.write("aqui-2")
+
 txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-st.write("aqui-3")
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
 
-#mostra_ner(sequence, "first")
-#mostra_ner(sequence, "average")
-#mostra_ner(sequence, "max")
-#st.subheader('Análise NER')
-#st.write(mostra_ner(txt, 'average'))
-
+txt = st.text_area('Texto a ser analisado', '''A C Ó R D Ã O
+Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
+Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
+Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
+Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
+em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
+PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
+Brasilia(DF), 15 de Março de 2018.''', height=300)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
         
 
 
