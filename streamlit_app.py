@@ -183,7 +183,7 @@ if uploaded_file is not None:
     st.write("aqui-3")
 
     # printing number of pages in pdf file 
-    print(pdfReader.numPages)
+    st.write(pdfReader.numPages)
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
