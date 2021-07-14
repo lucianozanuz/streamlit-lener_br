@@ -169,7 +169,7 @@ def carrega_modelo():
 st.write("aqui-2")
 nome_modelo_treinado, modelo_treinado, tokenizer_treinado = carrega_modelo()
 st.write("aqui-3")
-#st.write(nome_modelo_treinado)
+st.write(nome_modelo_treinado)
 #st.write(modelo_treinado)
 #st.write(tokenizer_treinado)
 
