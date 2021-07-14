@@ -170,7 +170,7 @@ if uploaded_file is not None:
     bytes_data = uploaded_file.getvalue()
     
     # creating a pdf file object 
-    pdfFileObj = open(uploaded_file, 'rb') 
+    pdfFileObj = open(bytes_data, 'rb') 
     st.write(pdfFileObj)
 
     # creating a pdf reader object 
