@@ -12,7 +12,9 @@ from transformers import pipeline, AutoModelForTokenClassification, AutoTokenize
 import json
 import requests
 
-st.write(st.session_state)
+debug = st.checkbox('Debug')
+if(debug):
+    st.write(st.session_state)
 
 st.title('Reconhecimento de Entidades Nomeadas')
 st.header('Header da aplicação.')
@@ -97,7 +99,8 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 #    was the spring of hope, it was the winter of despair, (...)
 #    ''')
 
-txt = st.text_area('Texto a ser analisado', '''A C Ó R D Ã O
+txt = st.text_area('Texto a ser analisado', height=200
+'''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
 Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
@@ -106,19 +109,15 @@ em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 ''')
-data = query({"inputs": txt})
-if("error" in data):
-    st.write(data["error"])
-st.write(data)
-st.write("aqui 3")
-data = ajusta_retorno_api(data)
-st.write("aqui 4")
-st.write(data)
-st.write("aqui 5")
+if(debug):
+    data = query({"inputs": txt})
+    if("error" in data):
+        st.write(data["error"])
+    st.write(data)
+    data = ajusta_retorno_api(data)
+    st.write(data)
 st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
-st.write("aqui 6")
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
-st.write("aqui 7")
 
 
 
