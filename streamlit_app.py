@@ -153,22 +153,25 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
 container = st.beta_container()
-container.write("This is inside the container")
-st.write("This is outside the container")
-container.write("This is inside the container 2")
+#container.write("This is inside the container")
+#st.write("This is outside the container")
+#container.write("This is inside the container 2")
 
 def processa_pdf():
-    st.write('PDF processado')
-    container.write("This is inside the container 3")
+    #st.write('PDF processado')
+    #container.write("This is inside the container 3")
     return
 processa_pdf()
 
 uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+pdf_text = ""
 if uploaded_file is not None:
     pdfReader = PyPDF2.PdfFileReader(uploaded_file) 
     for page in pdfReader.pages:
-        st.write(page.extractText())
-
+        pdf_text += page.extractText()
+        #st.write(page.extractText())
+st.write(pdf_text)
+        
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
 #else:
