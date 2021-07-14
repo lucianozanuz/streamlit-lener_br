@@ -181,9 +181,9 @@ if uploaded_file is not None:
     pdfReader = PyPDF2.PdfFileReader(uploaded_file) 
     st.write(pdfReader)
     st.write("aqui-3")
-#
-#    # printing number of pages in pdf file 
-#    print(pdfReader.numPages)
+
+    # printing number of pages in pdf file 
+    print(pdfReader.numPages)
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
