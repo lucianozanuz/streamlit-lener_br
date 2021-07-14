@@ -165,7 +165,7 @@ def carrega_tokenizer(nome_modelo_treinado):
     return tokenizer_treinado
 tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 
-st.write(ner_pipeline(txt, "simple"),unsafe_allow_html=True)
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
 
 #mostra_ner(sequence, "first")
 #mostra_ner(sequence, "average")
