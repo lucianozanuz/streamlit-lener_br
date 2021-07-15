@@ -193,6 +193,21 @@ if(debug):
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
         
 
+    
+    
+    
+import pdftotext
+ 
+# Load your PDF
+with open(uploaded_file, "rb") as f:
+    pdf = pdftotext.PDF(f)
+ 
+st.write("How many pages")
+st.write(len(pdf))
+
+st.write("\nIterate over all the pages\n")
+for page in pdf:
+    st.write(page)
 
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
