@@ -30,12 +30,12 @@ aggregation_strategy = st.sidebar.radio(
 
 opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
-    ('Meu nome é Luciano', 'Meu nome é Juliano', 'Texto LeNER_BR', 'Texto TJRS', 'Op1', 'Op2'))
+    ('Meu nome é Luciano', 'Meu nome é Juliano', 'Texto LeNER-Br', 'Texto TJRS', 'Vazio'))
 if(opt_txt_exemplo=="Meu nome é Luciano"):
     txt_exemplo = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
 elif(opt_txt_exemplo=="Meu nome é Juliano"):
     txt_exemplo = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
-elif(opt_txt_exemplo=="Texto LeNER_BR"):
+elif(opt_txt_exemplo=="Texto LeNER-Br"):
     txt_exemplo = '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
