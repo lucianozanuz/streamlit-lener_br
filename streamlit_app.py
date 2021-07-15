@@ -194,6 +194,26 @@ st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_stra
         
 
     
+
+import pdfminer
+from pdfminer.high_level import extract_pages
+import streamlit as st
+
+st.write(pdfminer.__version__)  
+
+#uploaded_file = st.file_uploader("Choose a file", "pdf")
+if uploaded_file is not None:
+    for page_layout in extract_pages(uploaded_file):
+        for element in page_layout:
+            st.write(element)
+
+
+
+
+    
+    
+    
+    
     
     
 import pdftotext
@@ -201,7 +221,7 @@ st.write("aqui-1")
 if uploaded_file is not None:
     st.write("aqui-2")
     # Load your PDF
-    with open(uploaded_file.getvalue(), "rb") as f:
+    with open(uploaded_file, "rb") as f:
         pdf = pdftotext.PDF(f)
 
     st.write("How many pages")
@@ -211,6 +231,7 @@ if uploaded_file is not None:
     for page in pdf:
         st.write(page)
 st.write("aqui-3")
+
 
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
