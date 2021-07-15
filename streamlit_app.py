@@ -15,9 +15,7 @@ import requests
 st.title('Reconhecimento de Entidades Nomeadas')
 #st.header('Header da aplicação.')
 #st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
-st.text('Modelo de aprendizado profundo BERT treinado a partir do Bertimbau utilizando o dataset LeNER-Br')
-st.write('Modelo de aprendizado profundo BERT treinado a partir do Bertimbau utilizando o dataset LeNER-Br')
-#st.write('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
+st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
 
 modelo = st.sidebar.radio(
     "Modelo treinado",
