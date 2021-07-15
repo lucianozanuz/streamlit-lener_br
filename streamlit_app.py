@@ -14,10 +14,11 @@ import requests
 
 st.title('Reconhecimento de Entidades Nomeadas')
 #st.header('Header da aplicação.')
-st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
+#st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 #st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 #st.write('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
+st.sidebar.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 modelo = st.sidebar.radio(
     "Modelo treinado",
     ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'))
