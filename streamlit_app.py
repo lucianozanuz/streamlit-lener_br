@@ -116,7 +116,7 @@ def carrega_tokenizer(nome_modelo_treinado):
     return tokenizer_treinado
 tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 
-txt = st.text_area('Texto a ser analisado', txt_exemplo, height=300, key="area1")
+txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
 
 ### API
@@ -158,7 +158,6 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
-txt = st.text_area('Texto a ser analisado', txt_exemplo, height=300, key="area2")
 if(debug):
     data = query({"inputs": txt})
     if("error" in data):
@@ -170,7 +169,6 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 ### Leitura de PDF
 
-st.write("aqui-1")
 uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 pdf_text = ""
 if uploaded_file is not None:
@@ -179,8 +177,7 @@ if uploaded_file is not None:
         pdf_text += page.extractText()
         #st.write(page.extractText())
 st.write(pdf_text)
-txt = st.text_area('Texto a ser analisado', pdf_text, height=300)
-st.write("aqui-2")
+txt = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
 
 if(debug):
     data = query({"inputs": txt})
