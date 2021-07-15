@@ -70,7 +70,7 @@ Termos em que,
 Pede deferimento.
 Porto Alegre/RS, 17 de julho de 2020.
 '''
-elif:
+else:
     txt_exemplo = ""    
     
 st.sidebar.write('Texto selecionado:', opt_txt_exemplo)
