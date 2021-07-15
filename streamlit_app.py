@@ -197,17 +197,20 @@ st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_stra
     
     
 import pdftotext
- 
-# Load your PDF
-with open(uploaded_file, "rb") as f:
-    pdf = pdftotext.PDF(f)
- 
-st.write("How many pages")
-st.write(len(pdf))
+st.write("aqui-1")
+if uploaded_file is not None:
+    st.write("aqui-2")
+    # Load your PDF
+    with open(uploaded_file, "rb") as f:
+        pdf = pdftotext.PDF(f)
 
-st.write("\nIterate over all the pages\n")
-for page in pdf:
-    st.write(page)
+    st.write("How many pages")
+    st.write(len(pdf))
+
+    st.write("\nIterate over all the pages\n")
+    for page in pdf:
+        st.write(page)
+st.write("aqui-3")
 
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
