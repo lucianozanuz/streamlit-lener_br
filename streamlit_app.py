@@ -37,8 +37,7 @@ if(opt_txt_exemplo=="Meu nome é Luciano"):
 elif(opt_txt_exemplo=="Meu nome é Juliano"):
     txt_exemplo = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
 elif(opt_txt_exemplo=="Texto LeNER_BR"):
-    txt_exemplo = '''
-A C Ó R D Ã O
+    txt_exemplo = '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
 Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
@@ -48,8 +47,7 @@ PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 '''
 elif(opt_txt_exemplo=="Texto TJRS"):
-    txt_exemplo = '''
-EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
+    txt_exemplo = '''EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
 REF.
 AUTOS Nº : 5000307-41.2020.8.21.5001
 OBJETO: AGRAVO DE INSTRUMENTO
@@ -98,8 +96,6 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
-txt = st.text_area('Texto a ser analisado', txt_exemplo, height=300, key="area1")
-
 #nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" 
 nome_modelo_treinado = modelo
 @st.cache
@@ -114,6 +110,12 @@ def carrega_tokenizer(nome_modelo_treinado):
     tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
     return tokenizer_treinado
 tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
+
+
+
+
+st.write(txt_exemplo)
+txt = st.text_area('Texto a ser analisado', txt_exemplo, height=300, key="area1")
 
 txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
