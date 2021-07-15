@@ -115,6 +115,8 @@ def carrega_tokenizer(nome_modelo_treinado):
 tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 
 txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
+
+st.subheader('Resultado via Huggingface Pipeline')
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
 
 ### API
@@ -163,6 +165,8 @@ if(debug):
     st.write(data)
     data = ajusta_retorno_api(data)
     st.write(data)
+    
+st.subheader('Resultado via Huggingface Inference API')
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 ### Leitura de PDF
@@ -184,6 +188,8 @@ if(debug):
     st.write(data)
     data = ajusta_retorno_api(data)
     st.write(data)
+
+st.subheader('Resultado do PDF via Huggingface Inference API')
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
         
