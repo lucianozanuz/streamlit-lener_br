@@ -201,7 +201,7 @@ st.write("aqui-1")
 if uploaded_file is not None:
     st.write("aqui-2")
     # Load your PDF
-    with open(uploaded_file, "rb") as f:
+    with open(uploaded_file.getvalue(), "rb") as f:
         pdf = pdftotext.PDF(f)
 
     st.write("How many pages")
