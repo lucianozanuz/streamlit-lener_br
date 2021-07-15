@@ -29,6 +29,10 @@ API_URL = "https://api-inference.huggingface.co/models/" + modelo
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
+aggregation_strategy = st.sidebar.radio(
+    "Aggregation strategy",
+    ('simple', 'first', 'average', 'max'))
+
 opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
     ('Meu nome é Luciano', 'Meu nome é Juliano', 'Texto LeNER_BR', 'Texto TJRS', 'Op1', 'Op2'))
