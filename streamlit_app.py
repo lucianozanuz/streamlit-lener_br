@@ -18,10 +18,6 @@ st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portug
 #st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 #st.write('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
-debug = st.sidebar.checkbox('Debug')
-if(debug):
-    st.write(st.session_state)
-
 modelo = st.sidebar.radio(
     "Modelo treinado",
     ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'))
@@ -75,7 +71,9 @@ Porto Alegre/RS, 17 de julho de 2020.
 else:
     txt_exemplo = ""    
     
-st.sidebar.write('Texto selecionado:', opt_txt_exemplo)
+debug = st.sidebar.checkbox('Debug')
+if(debug):
+    st.write(st.session_state)
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
           "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
@@ -115,23 +113,26 @@ def carrega_tokenizer(nome_modelo_treinado):
     return tokenizer_treinado
 tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 
-
-
-
-st.write(txt_exemplo)
 txt = st.text_area('Texto a ser analisado', txt_exemplo, height=300, key="area1")
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
 
-txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
 
-txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
+
+
+
+
+
+#txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
+
+#txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
 
 txt = '''
 A C Ó R D Ã O
@@ -143,10 +144,10 @@ em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 '''
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
 
 txt = '''
 EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
@@ -170,10 +171,10 @@ Termos em que,
 Pede deferimento.
 Porto Alegre/RS, 17 de julho de 2020.
 '''
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
+#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
 
 
 
