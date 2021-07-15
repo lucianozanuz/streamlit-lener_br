@@ -122,59 +122,6 @@ st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_stra
 
 
 
-#txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
-
-#txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
-
-txt = '''
-A C Ó R D Ã O
-Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
-Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
-Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
-Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
-em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
-PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
-Brasilia(DF), 15 de Março de 2018.
-'''
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
-
-txt = '''
-EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
-REF.
-AUTOS Nº : 5000307-41.2020.8.21.5001
-OBJETO: AGRAVO DE INSTRUMENTO
-FACTA FINANCEIRA S. A., inscrita no CNPJ sob o n°
-15.581.638/0001-30, com sede na Rua dos Andradas nº 1409, 07º
-andar – Bairro Centro, Porto Alegre/RS, CEP 90020-011, irresignada
-com decisão proferida nos autos do processo nº: 5000307-
-41.2020.8.21.5001, em trâmite no 1º Juízo da 2ª Vara Cível do Foro
-Regional do Sarandi da Comarca de Porto Alegre/RS, intentado por
-CLARINDA MARQUES SOARES, já qualificado nos autos, vem,
-respeitosamente, com fulcro no artigo 1.015 do Novo Código de
-Processo Civil, interpor tempestivamente o presente
-                      AGRAVO DE INSTRUMENTO,
-conforme as razões que seguem em anexo, requerendo, desde já, que
-as mesmas sejam recebidas, processadas e levadas à apreciação de
-uma de suas Colendas Câmaras.
-Termos em que,
-Pede deferimento.
-Porto Alegre/RS, 17 de julho de 2020.
-'''
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "simple"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "first"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "average"),unsafe_allow_html=True)
-#st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, "max"),unsafe_allow_html=True)
 
 
 
@@ -185,6 +132,8 @@ Porto Alegre/RS, 17 de julho de 2020.
 
 
 
+
+### API
 
 def query(payload):
     data = json.dumps(payload)
@@ -254,18 +203,7 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 
 
-
-container = st.beta_container()
-#container.write("This is inside the container")
-#st.write("This is outside the container")
-#container.write("This is inside the container 2")
-
-def processa_pdf():
-    #st.write('PDF processado')
-    #container.write("This is inside the container 3")
-    return
-processa_pdf()
-
+st.write("aqui-1")
 uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 pdf_text = ""
 if uploaded_file is not None:
@@ -275,6 +213,7 @@ if uploaded_file is not None:
         #st.write(page.extractText())
 st.write(pdf_text)
 txt = st.text_area('Texto a ser analisado', pdf_text, height=300)
+st.write("aqui-2")
 
 if(debug):
     data = query({"inputs": txt})
