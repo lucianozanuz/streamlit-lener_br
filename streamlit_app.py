@@ -74,6 +74,8 @@ else:
 debug = st.sidebar.checkbox('Debug')
 if(debug):
     st.write(st.session_state)
+    
+### Processamento do pipeline
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
           "TEMPO": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
@@ -116,23 +118,6 @@ tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
 txt = st.text_area('Texto a ser analisado', txt_exemplo, height=300, key="area1")
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### API
 
 def query(payload):
@@ -172,25 +157,7 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
-#txt = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
-#data = query(txt)
-#st.write(data)
-#txt = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
-#data = query(txt)
-#st.write(data)
-#data = ajusta_retorno_api(data)
-#st.write(data)
-#st.write(mostra_ner(txt, ajusta_retorno=False),unsafe_allow_html=True)
-#st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
-
-txt = st.text_area('Texto a ser analisado', '''A C Ó R D Ã O
-Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
-Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
-Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
-Vogal, sob a presidência do Senhor Desembargador DIAULAS COSTA RIBEIRO,
-em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
-PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
-Brasilia(DF), 15 de Março de 2018.''', height=300, key="area2")
+txt = st.text_area('Texto a ser analisado', txt_exemplo, height=300, key="area2")
 if(debug):
     data = query({"inputs": txt})
     if("error" in data):
@@ -200,8 +167,7 @@ if(debug):
     st.write(data)
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
-
-
+### Leitura de PDF
 
 st.write("aqui-1")
 uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
@@ -226,17 +192,6 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
         
 
-
-
-#@st.cache
-#def get_ner_pipeline():
-#    ner = pipeline("ner", model="Luciano/bertimbau-large-lener_br", aggregation_strategy="average")
-#    return ner
-#
-#pipeline = get_ner_pipeline()
-#st.write(pipeline.model)
-#st.write(pipeline.model.config)
-#st.write(pipeline("Meu nome é Luciano Zanuz"))
 
 
 #if st.sidebar.button('Enviar', key='bt_enviar'):
