@@ -22,7 +22,7 @@ st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portug
 #st.text('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 #st.write('Carregue o arquivo de algum texto jurídico em PDF e clique em Enviar')
 
-modelo = st.radio(
+modelo = st.sidebar.radio(
     "Modelo treinado",
     ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'))
 API_URL = "https://api-inference.huggingface.co/models/" + modelo
