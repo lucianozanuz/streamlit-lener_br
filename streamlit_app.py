@@ -171,6 +171,7 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 ### Leitura de PDF
 
+st.subheader('Resultado do PDF via Huggingface Pipeline')
 uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 pdf_text = ""
 if uploaded_file is not None:
@@ -189,7 +190,6 @@ if(debug):
     data = ajusta_retorno_api(data)
     st.write(data)
 
-st.subheader('Resultado do PDF via Huggingface Pipeline')
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
         
 
