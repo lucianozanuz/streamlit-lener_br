@@ -189,9 +189,8 @@ if(debug):
     data = ajusta_retorno_api(data)
     st.write(data)
 
-st.subheader('Resultado do PDF via Huggingface Inference API')
-st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
-
+st.subheader('Resultado do PDF via Huggingface Pipeline')
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
         
 
 
