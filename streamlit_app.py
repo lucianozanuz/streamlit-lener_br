@@ -159,11 +159,11 @@ def ajusta_retorno_api(data):
 def mostra_ner(texto, ajusta_retorno=False):
     #data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
     data = query({"inputs": texto})
-    st.write("data")
     if("error" in data):
         return data["error"]
     #"error":"Model Luciano/bertimbau-large-lener_br is currently loading"
                     
+    st.write("data")
     if(ajusta_retorno):
       data = ajusta_retorno_api(data)
     
