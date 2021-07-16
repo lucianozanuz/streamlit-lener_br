@@ -199,8 +199,9 @@ import pdfminer
 st.write(pdfminer.__version__)  
 from pdfminer import high_level
 st.write("aqui-2")
-text = high_level.extract_text(uploaded_file)
-st.write(text)
+if uploaded_file is not None:
+    text = high_level.extract_text(uploaded_file)
+    st.write(text)
 st.write("aqui-3")
     
     
