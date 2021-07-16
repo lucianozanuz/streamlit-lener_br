@@ -3,5 +3,5 @@ torch
 transformers
 spacy
 pdftotext
-pdfminer
+pdfminer.six
 PyPDF2
