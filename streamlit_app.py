@@ -12,7 +12,7 @@ from transformers import pipeline, AutoModelForTokenClassification, AutoTokenize
 import json
 import requests
 
-st.title('Reconhecimento de Entidades Nomeadas')p
+st.title('Reconhecimento de Entidades Nomeadas')
 #st.header('Header da aplicação.')
 #st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
