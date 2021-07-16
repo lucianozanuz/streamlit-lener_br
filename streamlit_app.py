@@ -17,6 +17,8 @@ st.title('Reconhecimento de Entidades Nomeadas')
 #st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
 
+### Parâmetros do processamento
+
 modelo = st.sidebar.radio(
     "Modelo treinado",
     ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'))
@@ -70,6 +72,8 @@ Porto Alegre/RS, 17 de julho de 2020.
 else:
     txt_exemplo = ""    
     
+uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+
 debug = st.sidebar.checkbox('Debug')
 if(debug):
     st.write(st.session_state)
@@ -99,27 +103,41 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
-#nome_modelo_treinado = "Luciano/bertimbau-large-lener_br" 
-nome_modelo_treinado = modelo
 @st.cache
-def carrega_modelo(nome_modelo_treinado):
-    modelo_treinado = AutoModelForTokenClassification.from_pretrained(nome_modelo_treinado)
+def carrega_modelo(modelo):
+    modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
     return modelo_treinado
-modelo_treinado = carrega_modelo(nome_modelo_treinado)
+modelo_treinado = carrega_modelo(modelo)
 
 #@st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
 @st.cache(allow_output_mutation=True) # Parâmetro necessário para não dar erro de hash
-def carrega_tokenizer(nome_modelo_treinado):
-    tokenizer_treinado = AutoTokenizer.from_pretrained(nome_modelo_treinado)
+def carrega_tokenizer(modelo):
+    tokenizer_treinado = AutoTokenizer.from_pretrained(modelo)
     return tokenizer_treinado
-tokenizer_treinado = carrega_tokenizer(nome_modelo_treinado)
+tokenizer_treinado = carrega_tokenizer(modelo)
 
-txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
+### NER via Pipeline sobre o texto de exemplo
 
 st.subheader('Resultado via Huggingface Pipeline')
+txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
 st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
 
-### API
+### NER via pipeline sobre o texto do PDF
+
+st.subheader('Resultado do PDF via Huggingface Pipeline')
+
+pdf_text = ""
+if uploaded_file is not None:
+    pdf_text = high_level.extract_text(uploaded_file)
+    if(debug):
+        st.write(pdf_text)
+        for page_layout in high_level.extract_pages(uploaded_file):
+            for element in page_layout:
+                st.write(element)
+txt = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
+st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+        
+### NER via API sobre o texto de exemplo
 
 def query(payload):
     data = json.dumps(payload)
@@ -158,36 +176,9 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
-if(debug):
-    data = query({"inputs": txt})
-    if("error" in data):
-        st.write(data["error"])
-    st.write(data)
-    data = ajusta_retorno_api(data)
-    st.write(data)
-    
 st.subheader('Resultado via Huggingface Inference API')
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
-### Leitura de PDF
-
-st.subheader('Resultado do PDF via Huggingface Pipeline')
-uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
-
-pdf_text = ""
-if uploaded_file is not None:
-    pdf_text = high_level.extract_text(uploaded_file)
-    for page_layout in high_level.extract_pages(uploaded_file):
-        for element in page_layout:
-            st.write(element)
-st.write(pdf_text)
-txt = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
-
-
-
-
-
-
 if(debug):
     data = query({"inputs": txt})
     if("error" in data):
@@ -195,37 +186,7 @@ if(debug):
     st.write(data)
     data = ajusta_retorno_api(data)
     st.write(data)
-
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
-        
-
-    
-
-
-
   
-    
-    
-    
-    
-#import pdftotext
-#st.write("aqui-1")
-#if uploaded_file is not None:
-#    st.write("aqui-2")
-#    # Load your PDF
-#    with open(uploaded_file, "rb") as f:
-#        pdf = pdftotext.PDF(f)
-
-#    st.write("How many pages")
-#    st.write(len(pdf))
-
-#    st.write("\nIterate over all the pages\n")
-#    for page in pdf:
-#        st.write(page)
-#st.write("aqui-3")
-
-
-
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
 #else:
