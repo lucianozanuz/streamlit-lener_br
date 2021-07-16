@@ -134,8 +134,9 @@ if uploaded_file is not None:
         for page_layout in high_level.extract_pages(uploaded_file):
             for element in page_layout:
                 st.write(element)
-txt = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
+if uploaded_file is not None:
+    st.write(ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
         
 ### NER via API sobre o texto de exemplo
 
