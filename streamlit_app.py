@@ -92,6 +92,8 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
 options = {"colors": colors}
 
 def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strategy):
+    if(texto==""):
+        return texto
     ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
     data = ner(texto)
 
