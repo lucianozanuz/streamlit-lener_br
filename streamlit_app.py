@@ -3,8 +3,8 @@ import streamlit as st
 import spacy
 from spacy import displacy
 
-import PyPDF2 
-from PyPDF2 import PdfFileWriter, PdfFileReader
+import pdfminer
+from pdfminer import high_level
 
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
@@ -194,16 +194,10 @@ st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_stra
         
 
     
-import pdfminer
-from pdfminer import high_level
-from pdfminer.high_level import extract_pages
-st.write("aqui-2")
 if uploaded_file is not None:
     text = high_level.extract_text(uploaded_file)
     st.write(text)
-st.write("aqui-3")
-if uploaded_file is not None:
-    for page_layout in extract_pages(uploaded_file):
+    for page_layout in high_level.extract_pages(uploaded_file):
         for element in page_layout:
             st.write(element)
 
