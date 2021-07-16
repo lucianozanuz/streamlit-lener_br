@@ -34,12 +34,12 @@ aggregation_strategy = st.sidebar.radio(
 
 opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
-    ('Meu nome é Luciano', 'Meu nome é Juliano', 'Texto LeNER-Br', 'Texto TJRS', 'Vazio'))
-if(opt_txt_exemplo=="Meu nome é Luciano"):
-    txt_exemplo = "Meu nome é Luciano Zanuz e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
-elif(opt_txt_exemplo=="Meu nome é Juliano"):
-    txt_exemplo = "Meu nome é Juliano Pacheco e eu moro em Canoas, Rio Grande do Sul, Brasil."
-elif(opt_txt_exemplo=="Texto LeNER-Br"):
+    ('Exemplo 1, 'Exemplo 2', 'Exemplo 3', 'Exemplo 4', 'Vazio'))
+if(opt_txt_exemplo=="Exemplo 1"):
+    txt_exemplo = "Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
+elif(opt_txt_exemplo=="Exemplo 2"):
+    txt_exemplo = "Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil."
+elif(opt_txt_exemplo=="Exemplo 3"):
     txt_exemplo = '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
@@ -49,7 +49,7 @@ em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 '''
-elif(opt_txt_exemplo=="Texto TJRS"):
+elif(opt_txt_exemplo=="Exemplo 4"):
     txt_exemplo = '''EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
 REF.
 AUTOS Nº : 5000307-41.2020.8.21.5001
