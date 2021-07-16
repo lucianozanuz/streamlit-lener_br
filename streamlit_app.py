@@ -12,6 +12,8 @@ from spacy import displacy
 import pdfminer
 from pdfminer import high_level
 
+import pdfplumber
+
 st.title('Reconhecimento de Entidades Nomeadas')
 #st.header('Header da aplicação.')
 #st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
@@ -137,7 +139,20 @@ if uploaded_file is not None:
 txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
 if uploaded_file is not None:
     st.write(ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
-        
+    
+### Teste com pdfpumbler
+
+pdf_text = ""
+if uploaded_file is not None:
+    with pdfplumber.open(uploaded_file) as pdf:
+        for page in pdf.pages:
+            pdf_text += page.extract_text()
+    if(debug):
+        st.write(pdf_text)
+txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area3")
+if uploaded_file is not None:
+    st.write(ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+    
 ### NER via API sobre o texto de exemplo
 
 def query(payload):
