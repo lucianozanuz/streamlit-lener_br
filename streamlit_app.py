@@ -149,7 +149,7 @@ if uploaded_file is not None:
             pdf_text += page.extract_text()
     if(debug):
         st.write(pdf_text)
-txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area3")
+txt_pdf = st.text_area('Texto do PDF via pdfpumbler', pdf_text, height=300, key="area3")
 if uploaded_file is not None:
     st.write(ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
     
