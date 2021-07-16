@@ -181,13 +181,12 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 if(debug):
     data = query({"inputs": txt})
-    if("error" in data):
+    st.write(data)
+    if(not "error" in data):
         st.write(data["error"])
-    st.write("aqui-1")
-    st.write(data)
-    data = ajusta_retorno_api(data)
+        st.write("aqui-1")
+        data = ajusta_retorno_api(data)
     st.write("aqui-2")
-    st.write(data)
   
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
