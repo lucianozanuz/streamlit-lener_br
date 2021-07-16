@@ -199,8 +199,8 @@ import pdfminer
 st.write(pdfminer.__version__)  
 from pdfminer import high_level
 st.write("aqui-2")
-text = high_level.extract_text("pdf1-df.pdf")
-print(text)
+text = high_level.extract_text(uploaded_file)
+st.write(text)
 st.write("aqui-3")
     
     
