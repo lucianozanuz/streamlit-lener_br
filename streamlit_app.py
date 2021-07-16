@@ -194,29 +194,22 @@ st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_stra
         
 
     
-st.write("aqui-1")
 import pdfminer
-st.write(pdfminer.__version__)  
 from pdfminer import high_level
+from pdfminer.high_level import extract_pages
 st.write("aqui-2")
 if uploaded_file is not None:
     text = high_level.extract_text(uploaded_file)
     st.write(text)
 st.write("aqui-3")
-    
-    
-#from pdfminer.high_level import extract_pages
-#uploaded_file = st.file_uploader("Choose a file", "pdf")
-#if uploaded_file is not None:
-#    for page_layout in extract_pages(uploaded_file):
-#        for element in page_layout:
-#            st.write(element)
+if uploaded_file is not None:
+    for page_layout in extract_pages(uploaded_file):
+        for element in page_layout:
+            st.write(element)
 
 
 
-
-    
-    
+  
     
     
     
