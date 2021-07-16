@@ -163,7 +163,6 @@ def mostra_ner(texto, ajusta_retorno=False):
         return data["error"]
     #"error":"Model Luciano/bertimbau-large-lener_br is currently loading"
                     
-    st.write("data")
     if(ajusta_retorno):
       data = ajusta_retorno_api(data)
     
@@ -184,8 +183,10 @@ if(debug):
     data = query({"inputs": txt})
     if("error" in data):
         st.write(data["error"])
+    st.write("aqui-1")
     st.write(data)
     data = ajusta_retorno_api(data)
+    st.write("aqui-2")
     st.write(data)
   
 #if st.sidebar.button('Enviar', key='bt_enviar'):
