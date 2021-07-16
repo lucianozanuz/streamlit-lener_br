@@ -12,7 +12,7 @@ from transformers import pipeline, AutoModelForTokenClassification, AutoTokenize
 import json
 import requests
 
-st.title('Reconhecimento de Entidades Nomeadas')
+st.title('Reconhecimento de Entidades Nomeadas')p
 #st.header('Header da aplicação.')
 #st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
@@ -173,14 +173,20 @@ st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 st.subheader('Resultado do PDF via Huggingface Pipeline')
 uploaded_file = st.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+
 pdf_text = ""
 if uploaded_file is not None:
-    pdfReader = PyPDF2.PdfFileReader(uploaded_file) 
-    for page in pdfReader.pages:
-        pdf_text += page.extractText()
-        #st.write(page.extractText())
+    pdf_text = high_level.extract_text(uploaded_file)
+    for page_layout in high_level.extract_pages(uploaded_file):
+        for element in page_layout:
+            st.write(element)
 st.write(pdf_text)
 txt = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
+
+
+
+
+
 
 if(debug):
     data = query({"inputs": txt})
@@ -194,12 +200,6 @@ st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_stra
         
 
     
-if uploaded_file is not None:
-    text = high_level.extract_text(uploaded_file)
-    st.write(text)
-    for page_layout in high_level.extract_pages(uploaded_file):
-        for element in page_layout:
-            st.write(element)
 
 
 
