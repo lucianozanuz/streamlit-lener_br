@@ -34,7 +34,7 @@ aggregation_strategy = st.sidebar.radio(
 
 opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
-    ('Exemplo 1, 'Exemplo 2', 'Exemplo 3', 'Exemplo 4', 'Vazio'))
+    ('Exemplo 1', 'Exemplo 2', 'Exemplo 3', 'Exemplo 4', 'Vazio'))
 if(opt_txt_exemplo=="Exemplo 1"):
     txt_exemplo = "Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
 elif(opt_txt_exemplo=="Exemplo 2"):
