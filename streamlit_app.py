@@ -1,16 +1,16 @@
 import streamlit as st
 
-import spacy
-from spacy import displacy
-
-import pdfminer
-from pdfminer import high_level
-
 import transformers
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 
 import json
 import requests
+
+import spacy
+from spacy import displacy
+
+import pdfminer
+from pdfminer import high_level
 
 st.title('Reconhecimento de Entidades Nomeadas')
 #st.header('Header da aplicação.')
@@ -183,10 +183,8 @@ if(debug):
     data = query({"inputs": txt})
     st.write(data)
     if(not "error" in data):
-        st.write(data["error"])
-        st.write("aqui-1")
         data = ajusta_retorno_api(data)
-    st.write("aqui-2")
+        st.write(data)
   
 #if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
