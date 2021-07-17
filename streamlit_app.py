@@ -174,8 +174,6 @@ if uploaded_file is not None:
 txt_pdf = st.text_area('Teste com pdfpumbler por frase', pdf_text, height=300, key="area4")
 if uploaded_file is not None:
     for i, item in enumerate(sequences):
-        if(debug):
-            st.write(i,len(item),item)
         if(not item.isspace()):
             st.write(ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
 
