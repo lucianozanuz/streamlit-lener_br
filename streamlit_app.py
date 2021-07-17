@@ -154,9 +154,8 @@ if uploaded_file is not None:
 txt_pdf = st.text_area('Texto do PDF via pdfpumbler', pdf_text, height=300, key="area3")
 if uploaded_file is not None:
     st.write(ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
-
     
-    
+### Teste com pdfpumbler por frase    
     
 nlp = spacy.load("pt_core_news_sm")
 if uploaded_file is not None:
@@ -164,14 +163,24 @@ if uploaded_file is not None:
     tam = 0
     sequences = []
     for i, sent in enumerate(doc.sents):
-        st.write(i,len(sent.text),sent.text)
         sequences.append(sent.text)
-        if(len(sent.text)>tam):
-            tam = len(sent.text)
-    st.write("Maior sequence =", tam)
+        if(debug):
+            st.write(i,len(sent.text),sent.text)
+            if(len(sent.text)>tam):
+                tam = len(sent.text)
+    if(debug):
+        st.write("Maior sequence =", tam)
+
+txt_pdf = st.text_area('Teste com pdfpumbler por frase    ', pdf_text, height=300, key="area4")
+if uploaded_file is not None:
+    for i, item in enumerate(sequences):
+        if(not item.isspace()):
+            st.write(ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
 
 
 
+    
+    
 
     
 ### NER via API sobre o texto de exemplo
