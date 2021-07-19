@@ -106,19 +106,10 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     ex = [{"text": texto,
           "ents": ents,
           "title": None}]
-    
-    
-    st.write(data)
-    st.write(ents)
-    #df1 = df = pd.DataFrame({"Entidade":[data.entity_group],
-    #                         "Valor":[data.word]})
-    
-    
-    
-    #df = pd.DataFrame(data)
+        
     df = pd.DataFrame(data,
                       columns=['entity_group', 'word'])
-    df.rename(columns = {'entity_group':'Entidade'}, inplace = True)
+    df.rename(columns = {'entity_group':'Entidade','word':'Valor'}, inplace = True)
     
     #df = pd.DataFrame(columns=['Entidade','Valor'])
     #for entity_group, word in item.items():
