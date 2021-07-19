@@ -83,7 +83,7 @@ opt_pdf = st.sidebar.radio(
 
 debug = st.sidebar.checkbox('Debug')
 if(debug):
-    st.write(st.session_state)
+    st.sidebar.write(st.session_state)
     
 ### Processamento do pipeline
 
