@@ -132,8 +132,8 @@ tokenizer_treinado = carrega_tokenizer(modelo)
 
 st.subheader('Resultado via Huggingface Pipeline')
 txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
-ner_df, ner_displacy = ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
-st.write(ner_displacy)
+ner_df, ner_displacy = ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+st.write(ner_displacy,unsafe_allow_html=True))
 my_table = st.table(ner_df)
 
 
@@ -151,8 +151,8 @@ if uploaded_file is not None:
                 st.write(element)
 txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
 if uploaded_file is not None:
-    ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
-    st.write(ner_displacy)
+    ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+    st.write(ner_displacy,unsafe_allow_html=True))
     my_table = st.table(ner_df)
     
 ### Teste com pdfpumbler
@@ -166,8 +166,8 @@ if uploaded_file is not None:
         st.write(pdf_text)
 txt_pdf = st.text_area('Texto do PDF via pdfpumbler', pdf_text, height=300, key="area3")
 if uploaded_file is not None:
-    ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
-    st.write(ner_displacy)
+    ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+    st.write(ner_displacy,unsafe_allow_html=True))
     my_table = st.table(ner_df)
     
 ### Teste com pdfpumbler por frase    
@@ -190,8 +190,8 @@ txt_pdf = st.text_area('Teste com pdfpumbler por frase', pdf_text, height=300, k
 if uploaded_file is not None:
     for i, item in enumerate(sequences):
         if(not item.isspace()):
-            ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
-            st.write(ner_displacy)
+            ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+            st.write(ner_displacy,unsafe_allow_html=True))
             my_table = st.table(ner_df)
 
 
