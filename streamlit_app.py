@@ -77,7 +77,7 @@ else:
     
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
-opt_pdf = st.sidebar.selectbox(
+opt_pdf = st.sidebar.radio(
     'Processamento do PDF',
     ('pdfminer', 'pdfplumber', 'pdfplumber por frase'))
 
