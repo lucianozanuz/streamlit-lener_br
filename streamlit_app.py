@@ -108,7 +108,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
           "title": None}]
     
     
-    df1 = pd.DataFrame(columns=['Entidade','Valor'])
+    df = pd.DataFrame(columns=['Entidade','Valor'])
     for entity_group, word in item.items():
         df = df.append({'Entidade': entity_group}, ignore_index=True)
     #for i in range(5):
