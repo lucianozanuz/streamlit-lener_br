@@ -151,7 +151,9 @@ if uploaded_file is not None:
                 st.write(element)
 txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
 if uploaded_file is not None:
-    st.write(ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+    ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+    st.write(ner_displacy)
+    my_table = st.table(ner_df)
     
 ### Teste com pdfpumbler
 
@@ -164,7 +166,9 @@ if uploaded_file is not None:
         st.write(pdf_text)
 txt_pdf = st.text_area('Texto do PDF via pdfpumbler', pdf_text, height=300, key="area3")
 if uploaded_file is not None:
-    st.write(ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+    ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+    st.write(ner_displacy)
+    my_table = st.table(ner_df)
     
 ### Teste com pdfpumbler por frase    
     
@@ -186,8 +190,9 @@ txt_pdf = st.text_area('Teste com pdfpumbler por frase', pdf_text, height=300, k
 if uploaded_file is not None:
     for i, item in enumerate(sequences):
         if(not item.isspace()):
-            st.write(ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
-
+            ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+            st.write(ner_displacy)
+            my_table = st.table(ner_df)
 
 
     
