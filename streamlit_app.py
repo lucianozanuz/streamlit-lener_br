@@ -162,6 +162,7 @@ if(opt_pdf == "pdfminer"):
 ### Teste com pdfpumbler
 
 elif(opt_pdf == "pdfplumber"):  
+    txt_pdf = ""
     pdf_text = ""
     if uploaded_file is not None:
         with pdfplumber.open(uploaded_file) as pdf:
