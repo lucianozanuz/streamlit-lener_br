@@ -193,7 +193,7 @@ elif(opt_pdf == "pdfplumber por frase"):
         if(debug):
             st.write("Maior sequence =", tam)
 
-    txt_pdf = st.text_area('Teste com pdfpumbler por frase', pdf_text, height=300, key="area4")
+    txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area4")
     if uploaded_file is not None:
         for i, item in enumerate(sequences):
             if(not item.isspace()):
