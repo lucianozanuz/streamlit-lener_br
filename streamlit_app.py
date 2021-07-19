@@ -109,11 +109,13 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     
     
     df1 = pd.DataFrame(columns=['Entidade','Valor'])
+    for entity_group, word in item.items():
+        df = df.append({'Entidade': entity_group}, ignore_index=True)
     #for i in range(5):
         #df = df.append({'A': i}, ignore_index=True)    
 
-    pd.concat([pd.DataFrame([entity_group, word], columns=['Entidade','Valor']) for entity_group, word in item.items()],
-              ignore_index=True)
+    #pd.concat([pd.DataFrame([entity_group, word], columns=['Entidade','Valor']) for entity_group, word in item.items()],
+    #          ignore_index=True)
 
 #    df1 = pd.DataFrame(
 #        columns=("Entidade","Valor"))
