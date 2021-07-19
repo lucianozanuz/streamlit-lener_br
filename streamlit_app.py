@@ -98,6 +98,10 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
     data = ner(texto)
         
+    df = pd.DataFrame(data,
+                      columns=['entity_group', 'word'])
+    df.rename(columns = {'entity_group':'Entidade','word':'Valor'}, inplace = True)
+    
     ents = []
     for item in data:
       item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
@@ -107,32 +111,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
           "ents": ents,
           "title": None}]
         
-    df = pd.DataFrame(data,
-                      columns=['entity_group', 'word'])
-    df.rename(columns = {'entity_group':'Entidade','word':'Valor'}, inplace = True)
-    
-    #df = pd.DataFrame(columns=['Entidade','Valor'])
-    #for entity_group, word in item.items():
-    #    df = df.append({'Entidade': entity_group}, ignore_index=True)
-    #for i in range(5):
-        #df = df.append({'A': i}, ignore_index=True)    
-
-    #pd.concat([pd.DataFrame([entity_group, word], columns=['Entidade','Valor']) for entity_group, word in item.items()],
-    #          ignore_index=True)
-
-#    df1 = pd.DataFrame(
-#        columns=("Entidade","Valor"))
-    
-    my_table = st.table(df)
-    
-#    df2 = pd.DataFrame(
-#        columns=(item.entity, item.word)
-        
-#    my_table.add_rows(df2)
-    
-    
-    
-    return displacy.render(ex, style="ent", options=options, manual=True)    
+    return df, displacy.render(ex, style="ent", options=options, manual=True)    
 
 @st.cache
 def carrega_modelo(modelo):
@@ -151,7 +130,10 @@ tokenizer_treinado = carrega_tokenizer(modelo)
 
 st.subheader('Resultado via Huggingface Pipeline')
 txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
-st.write(ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+ner_df, ner_displacy = ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy),unsafe_allow_html=True)
+st.write(ner_displacy)
+my_table = st.table(ner_df)
+
 
 ### NER via pipeline sobre o texto do PDF
 
