@@ -186,18 +186,27 @@ elif(opt_pdf == "pdfplumber por frase"):
         if(debug):
             st.write(pdf_text)
 
-        nlp = spacy.load("pt_core_news_sm")
+        #nlp = spacy.load("pt_core_news_sm")
+        
         #nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
         #nlp.enable_pipe("senter")
-        doc = nlp(pdf_text)
+        #doc = nlp(pdf_text)
+        #tam = 0
+        #sequences = []
+        #for i, sent in enumerate(doc.sents):
+        #    sequences.append(sent.text)
+        #    if(debug):
+        #        st.write(i,len(sent.text),sent.text)
+        #        if(len(sent.text)>tam):
+        #            tam = len(sent.text)
+                    
+        sequences = sequence.split('\n\n')
         tam = 0
-        sequences = []
-        for i, sent in enumerate(doc.sents):
-            sequences.append(sent.text)
+        for i, sent in enumerate(sequences):
             if(debug):
-                st.write(i,len(sent.text),sent.text)
-                if(len(sent.text)>tam):
-                    tam = len(sent.text)
+                st.write(i,len(sent),sent)
+                if(len(sent)>tam):
+                    tam = len(sent)                   
         if(debug):
             st.write("Maior sequence =", tam)
 
