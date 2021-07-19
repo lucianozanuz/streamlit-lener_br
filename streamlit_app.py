@@ -15,7 +15,7 @@ from pdfminer import high_level
 
 import pdfplumber
 
-st.title('Reconhecimento de Entidades Nomeadas')
+st.title('Reconhecimento de Entidades Nomeadas Jurídicas')
 #st.header('Header da aplicação.')
 #st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
