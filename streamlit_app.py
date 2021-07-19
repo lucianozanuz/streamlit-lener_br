@@ -97,12 +97,24 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
         return texto
     ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
     data = ner(texto)
+        
+    ents = []
+    for item in data:
+      item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
+      ents.append(item);
+
+    ex = [{"text": texto,
+          "ents": ents,
+          "title": None}]
     
     
-    df = pd.DataFrame(columns=['A'])
-    for i in range(5):
-        df = df.append({'A': i}, ignore_index=True)    
-    
+    #df = pd.DataFrame(columns=['A'])
+    #for i in range(5):
+        #df = df.append({'A': i}, ignore_index=True)    
+
+    pd.concat([pd.DataFrame([i], columns=['Entidade'], columns=['Valor']) for entity_group, word in item.items()],
+              ignore_index=True)
+
 #    df1 = pd.DataFrame(
 #        columns=("Entidade","Valor"))
     
@@ -113,14 +125,8 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
         
 #    my_table.add_rows(df2)
     
-    ents = []
-    for item in data:
-      item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
-      ents.append(item);
-
-    ex = [{"text": texto,
-          "ents": ents,
-          "title": None}]
+    
+    
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
 @st.cache
