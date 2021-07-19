@@ -186,9 +186,9 @@ elif(opt_pdf == "pdfplumber por frase"):
         if(debug):
             st.write(pdf_text)
 
-        #nlp = spacy.load("pt_core_news_sm")
-        nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
-        nlp.enable_pipe("senter")
+        nlp = spacy.load("pt_core_news_sm")
+        #nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
+        #nlp.enable_pipe("senter")
         doc = nlp(pdf_text)
         tam = 0
         sequences = []
