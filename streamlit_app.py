@@ -98,9 +98,9 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
     data = ner(texto)
         
-    df = pd.DataFrame(data,
-                      columns=['entity_group', 'word'])
-    df.rename(columns = {'entity_group':'Entidade','word':'Valor'}, inplace = True)
+    ner_df = pd.DataFrame(data,
+                          columns=['entity_group', 'word'])
+    ner_df.rename(columns = {'entity_group':'Entidade','word':'Valor'}, inplace = True)
     
     ents = []
     for item in data:
@@ -110,8 +110,10 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     ex = [{"text": texto,
           "ents": ents,
           "title": None}]
-        
-    return df, displacy.render(ex, style="ent", options=options, manual=True)    
+
+    ner_displacy = displacy.render(ex, style="ent", options=options, manual=True)
+    
+    return ner_df, ner_displacy
 
 @st.cache
 def carrega_modelo(modelo):
