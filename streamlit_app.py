@@ -134,7 +134,7 @@ tokenizer_treinado = carrega_tokenizer(modelo)
 
 ### NER via Pipeline sobre o texto de exemplo
 
-st.subheader('Resultado via Huggingface Pipeline')
+st.subheader('Resultado do texto de exemplo via Huggingface Pipeline')
 txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
 ner_df, ner_displacy = ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy)
 st.write(ner_displacy,unsafe_allow_html=True)
@@ -239,7 +239,7 @@ def mostra_ner(texto, ajusta_retorno=False):
           "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)    
 
-st.subheader('Resultado via Huggingface Inference API')
+st.subheader('Resultado do texto de exemplo via Huggingface Inference API')
 st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
 
 if(debug):
