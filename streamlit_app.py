@@ -108,11 +108,11 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
           "title": None}]
     
     
-    #df = pd.DataFrame(columns=['A'])
+    df1 = pd.DataFrame(columns=['Entidade','Valor'])
     #for i in range(5):
         #df = df.append({'A': i}, ignore_index=True)    
 
-    pd.concat([pd.DataFrame([i], columns=['Entidade']) for entity_group in item.items()],
+    pd.concat([entity_group, columns=['Entidade']) for entity_group in item.items()],
               ignore_index=True)
 
 #    df1 = pd.DataFrame(
