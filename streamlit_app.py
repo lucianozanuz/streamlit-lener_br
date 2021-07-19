@@ -31,7 +31,8 @@ headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
 aggregation_strategy = st.sidebar.radio(
     "Aggregation strategy",
-    ('simple', 'first', 'average', 'max'))
+    ('simple', 'first', 'average', 'max'),
+    index=3)
 
 opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
