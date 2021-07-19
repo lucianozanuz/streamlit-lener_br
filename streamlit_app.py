@@ -180,8 +180,14 @@ elif(opt_pdf == "pdfplumber"):
 elif(opt_pdf == "pdfplumber por frase"):
     pdf_text = ""
     if uploaded_file is not None:
+        with pdfplumber.open(uploaded_file) as pdf:
+            for page in pdf.pages:
+                pdf_text += page.extract_text()
+        if(debug):
+            st.write(pdf_text)
+
         nlp = spacy.load("pt_core_news_sm")
-        doc = nlp(txt_pdf)
+        doc = nlp(pdf_text)
         tam = 0
         sequences = []
         for i, sent in enumerate(doc.sents):
