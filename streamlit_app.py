@@ -77,6 +77,10 @@ else:
     
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
+opt_pdf = st.sidebar.selectbox(
+    'Processamento do PDF',
+    ('pdfminer', 'pdfplumber', 'pdfplumber por frase'))
+
 debug = st.sidebar.checkbox('Debug')
 if(debug):
     st.write(st.session_state)
@@ -136,69 +140,66 @@ ner_df, ner_displacy = ner_pipeline(txt, modelo_treinado, tokenizer_treinado, ag
 st.write(ner_displacy,unsafe_allow_html=True)
 my_table = st.table(ner_df)
 
-
 ### NER via pipeline sobre o texto do PDF
 
 st.subheader('Resultado do PDF via Huggingface Pipeline')
 
-pdf_text = ""
-if uploaded_file is not None:
-    pdf_text = high_level.extract_text(uploaded_file)
-    if(debug):
-        st.write(pdf_text)
-        for page_layout in high_level.extract_pages(uploaded_file):
-            for element in page_layout:
-                st.write(element)
-txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
-if uploaded_file is not None:
-    ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-    st.write(ner_displacy,unsafe_allow_html=True)
-    my_table = st.table(ner_df)
+if(opt_pdf == "pdfminer"):
+    pdf_text = ""
+    if uploaded_file is not None:
+        pdf_text = high_level.extract_text(uploaded_file)
+        if(debug):
+            st.write(pdf_text)
+            for page_layout in high_level.extract_pages(uploaded_file):
+                for element in page_layout:
+                    st.write(element)
+    txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area2")
+    if uploaded_file is not None:
+        ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+        st.write(ner_displacy,unsafe_allow_html=True)
+        my_table = st.table(ner_df)
     
 ### Teste com pdfpumbler
 
-pdf_text = ""
-if uploaded_file is not None:
-    with pdfplumber.open(uploaded_file) as pdf:
-        for page in pdf.pages:
-            pdf_text += page.extract_text()
-    if(debug):
-        st.write(pdf_text)
-txt_pdf = st.text_area('Texto do PDF via pdfpumbler', pdf_text, height=300, key="area3")
-if uploaded_file is not None:
-    ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-    st.write(ner_displacy,unsafe_allow_html=True)
-    my_table = st.table(ner_df)
+elif(opt_pdf == "pdfplumber"):  
+    pdf_text = ""
+    if uploaded_file is not None:
+        with pdfplumber.open(uploaded_file) as pdf:
+            for page in pdf.pages:
+                pdf_text += page.extract_text()
+        if(debug):
+            st.write(pdf_text)
+    txt_pdf = st.text_area('Texto do PDF via pdfpumbler', pdf_text, height=300, key="area3")
+    if uploaded_file is not None:
+        ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+        st.write(ner_displacy,unsafe_allow_html=True)
+        my_table = st.table(ner_df)
     
 ### Teste com pdfpumbler por frase    
-    
-nlp = spacy.load("pt_core_news_sm")
-if uploaded_file is not None:
-    doc = nlp(txt_pdf)
-    tam = 0
-    sequences = []
-    for i, sent in enumerate(doc.sents):
-        sequences.append(sent.text)
+
+elif(opt_pdf == "pdfplumber por frase"):
+    if uploaded_file is not None:
+        nlp = spacy.load("pt_core_news_sm")
+        doc = nlp(txt_pdf)
+        tam = 0
+        sequences = []
+        for i, sent in enumerate(doc.sents):
+            sequences.append(sent.text)
+            if(debug):
+                st.write(i,len(sent.text),sent.text)
+                if(len(sent.text)>tam):
+                    tam = len(sent.text)
         if(debug):
-            st.write(i,len(sent.text),sent.text)
-            if(len(sent.text)>tam):
-                tam = len(sent.text)
-    if(debug):
-        st.write("Maior sequence =", tam)
+            st.write("Maior sequence =", tam)
 
-txt_pdf = st.text_area('Teste com pdfpumbler por frase', pdf_text, height=300, key="area4")
-if uploaded_file is not None:
-    for i, item in enumerate(sequences):
-        if(not item.isspace()):
-            ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-            st.write(ner_displacy,unsafe_allow_html=True)
-            my_table = st.table(ner_df)
+    txt_pdf = st.text_area('Teste com pdfpumbler por frase', pdf_text, height=300, key="area4")
+    if uploaded_file is not None:
+        for i, item in enumerate(sequences):
+            if(not item.isspace()):
+                ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+                st.write(ner_displacy,unsafe_allow_html=True)
+                my_table = st.table(ner_df)
 
-
-    
-    
-
-    
 ### NER via API sobre o texto de exemplo
 
 def query(payload):
