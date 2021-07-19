@@ -162,7 +162,6 @@ if(opt_pdf == "pdfminer"):
 ### Teste com pdfpumbler
 
 elif(opt_pdf == "pdfplumber"):  
-    txt_pdf = ""
     pdf_text = ""
     if uploaded_file is not None:
         with pdfplumber.open(uploaded_file) as pdf:
@@ -179,6 +178,7 @@ elif(opt_pdf == "pdfplumber"):
 ### Teste com pdfpumbler por frase    
 
 elif(opt_pdf == "pdfplumber por frase"):
+    pdf_text = ""
     if uploaded_file is not None:
         nlp = spacy.load("pt_core_news_sm")
         doc = nlp(txt_pdf)
