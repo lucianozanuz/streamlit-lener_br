@@ -115,9 +115,14 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     
     
     
-    df = pd.DataFrame(columns=['Entidade','Valor'])
-    for entity_group, word in item.items():
-        df = df.append({'Entidade': entity_group}, ignore_index=True)
+    df = pd.DataFrame(data)
+    #df = pd.DataFrame(data,
+    #              index=['a', 'b', 'c', 'd'],
+    #              columns=['Name', 'Marks'])
+    
+    #df = pd.DataFrame(columns=['Entidade','Valor'])
+    #for entity_group, word in item.items():
+    #    df = df.append({'Entidade': entity_group}, ignore_index=True)
     #for i in range(5):
         #df = df.append({'A': i}, ignore_index=True)    
 
