@@ -109,7 +109,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     
     
     st.write(data)
-    se.write(ents)
+    st.write(ents)
     #df1 = df = pd.DataFrame({"Entidade":[data.entity_group],
     #                         "Valor":[data.word]})
     
