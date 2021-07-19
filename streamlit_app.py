@@ -117,8 +117,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     
     #df = pd.DataFrame(data)
     df = pd.DataFrame(data,
-                      index=['a', 'c'],
-                      columns=['Entidade', 'Valor'])
+                      columns=['entity_group', 'word'])
     
     #df = pd.DataFrame(columns=['Entidade','Valor'])
     #for entity_group, word in item.items():
