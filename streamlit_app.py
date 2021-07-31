@@ -16,8 +16,8 @@ from pdfminer import high_level
 import pdfplumber
 
 st.title('Reconhecimento de Entidades Nomeadas Jurídicas')
-#st.header('Header da aplicação.')
-#st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
+# st.header('Header da aplicação.')
+# st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
 
 ### Parâmetros do processamento
@@ -37,11 +37,11 @@ aggregation_strategy = st.sidebar.radio(
 opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
     ('Exemplo 1', 'Exemplo 2', 'Exemplo 3', 'Exemplo 4', 'Vazio'))
-if(opt_txt_exemplo=="Exemplo 1"):
+if (opt_txt_exemplo == "Exemplo 1"):
     txt_exemplo = "Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
-elif(opt_txt_exemplo=="Exemplo 2"):
+elif (opt_txt_exemplo == "Exemplo 2"):
     txt_exemplo = "Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil."
-elif(opt_txt_exemplo=="Exemplo 3"):
+elif (opt_txt_exemplo == "Exemplo 3"):
     txt_exemplo = '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
@@ -51,7 +51,7 @@ em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 '''
-elif(opt_txt_exemplo=="Exemplo 4"):
+elif (opt_txt_exemplo == "Exemplo 4"):
     txt_exemplo = '''EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
 REF.
 AUTOS Nº : 5000307-41.2020.8.21.5001
@@ -74,18 +74,19 @@ Pede deferimento.
 Porto Alegre/RS, 17 de julho de 2020.
 '''
 else:
-    txt_exemplo = ""    
-    
-uploaded_file = st.sidebar.file_uploader("Selecione um PDF", help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+    txt_exemplo = ""
+
+uploaded_file = st.sidebar.file_uploader("Selecione um PDF",
+                                         help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
 opt_pdf = st.sidebar.radio(
     'Processamento do PDF',
     ('pdfminer', 'pdfminer por frase', 'pdfplumber', 'pdfplumber por frase'))
 
 debug = st.sidebar.checkbox('Debug')
-if(debug):
+if (debug):
     st.sidebar.write(st.session_state)
-    
+
 ### Processamento do pipeline
 
 colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1) 35%, rgba(0,212,255,1) 100%)",
@@ -97,40 +98,48 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
           }
 options = {"colors": colors}
 
+
 def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strategy):
-    if(texto==""):
+    if (texto == ""):
         return pd.DataFrame(), texto
-    ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado, aggregation_strategy=aggregation_strategy)
+    ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado,
+                   aggregation_strategy=aggregation_strategy)
     data = ner(texto)
-        
+
     ner_df = pd.DataFrame(data,
                           columns=['entity_group', 'word'])
-    ner_df.rename(columns = {'entity_group':'Entidade','word':'Valor'}, inplace = True)
-    
+    ner_df.rename(columns={'entity_group': 'Entidade', 'word': 'Valor'}, inplace=True)
+
     ents = []
     for item in data:
-      item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
-      ents.append(item);
+        item = {"label" if k == "entity_group" else k: v for k, v in item.items()}
+        ents.append(item)
 
     ex = [{"text": texto,
-          "ents": ents,
-          "title": None}]
+           "ents": ents,
+           "title": None}]
 
     ner_displacy = displacy.render(ex, style="ent", options=options, manual=True)
-    
+
     return ner_df, ner_displacy
 
-@st.cache
+
+@st.cache(ttl=600)
 def carrega_modelo(modelo):
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
     return modelo_treinado
+
+
 modelo_treinado = carrega_modelo(modelo)
 
-#@st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
-@st.cache(allow_output_mutation=True) # Parâmetro necessário para não dar erro de hash
+
+# @st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
+@st.cache(allow_output_mutation=True, ttl=600)  # Parâmetro necessário para não dar erro de hash
 def carrega_tokenizer(modelo):
     tokenizer_treinado = AutoTokenizer.from_pretrained(modelo)
     return tokenizer_treinado
+
+
 tokenizer_treinado = carrega_tokenizer(modelo)
 
 ### NER via Pipeline sobre o texto de exemplo
@@ -138,18 +147,18 @@ tokenizer_treinado = carrega_tokenizer(modelo)
 st.subheader('Resultado do texto de exemplo via Huggingface Pipeline')
 txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
 ner_df, ner_displacy = ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-st.write(ner_displacy,unsafe_allow_html=True)
+st.write(ner_displacy, unsafe_allow_html=True)
 my_table = st.table(ner_df)
 
 ### NER via pipeline sobre o texto do PDF
 
 st.subheader('Resultado do PDF via Huggingface Pipeline')
 
-if(opt_pdf == "pdfminer"):
+if (opt_pdf == "pdfminer"):
     pdf_text = ""
     if uploaded_file is not None:
         pdf_text = high_level.extract_text(uploaded_file)
-        if(debug):
+        if (debug):
             st.write(pdf_text)
             for page_layout in high_level.extract_pages(uploaded_file):
                 for element in page_layout:
@@ -157,14 +166,14 @@ if(opt_pdf == "pdfminer"):
     txt_pdf = st.text_area('Texto do PDF via pdfminer', pdf_text, height=300, key="area2")
     if uploaded_file is not None:
         ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-        st.write(ner_displacy,unsafe_allow_html=True)
+        st.write(ner_displacy, unsafe_allow_html=True)
         my_table = st.table(ner_df)
-        
-elif(opt_pdf == "pdfminer por frase"):
+
+elif (opt_pdf == "pdfminer por frase"):
     pdf_text = ""
     if uploaded_file is not None:
         pdf_text = high_level.extract_text(uploaded_file)
-        if(debug):
+        if (debug):
             st.write(pdf_text)
             for page_layout in high_level.extract_pages(uploaded_file):
                 for element in page_layout:
@@ -173,75 +182,76 @@ elif(opt_pdf == "pdfminer por frase"):
         sequences = pdf_text.split('\n\n')
         tam = 0
         for i, sent in enumerate(sequences):
-            if(debug):
-                st.write(i,len(sent),sent)
-                if(len(sent)>tam):
-                    tam = len(sent)                   
-        if(debug):
+            if (debug):
+                st.write(i, len(sent), sent)
+                if (len(sent) > tam):
+                    tam = len(sent)
+        if (debug):
             st.write("Maior sequence =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfminer por frase', pdf_text, height=300, key="area3")
     if uploaded_file is not None:
         for i, item in enumerate(sequences):
-            if(not item.isspace()):
+            if (not item.isspace()):
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-                st.write(ner_displacy,unsafe_allow_html=True)
+                st.write(ner_displacy, unsafe_allow_html=True)
                 my_table = st.table(ner_df)
-        
-elif(opt_pdf == "pdfplumber"):  
+
+elif (opt_pdf == "pdfplumber"):
     pdf_text = ""
     if uploaded_file is not None:
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 pdf_text += page.extract_text()
-        if(debug):
+        if (debug):
             st.write(pdf_text)
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler', pdf_text, height=300, key="area4")
     if uploaded_file is not None:
         ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-        st.write(ner_displacy,unsafe_allow_html=True)
+        st.write(ner_displacy, unsafe_allow_html=True)
         my_table = st.table(ner_df)
-    
-elif(opt_pdf == "pdfplumber por frase"):
+
+elif (opt_pdf == "pdfplumber por frase"):
     pdf_text = ""
     if uploaded_file is not None:
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 pdf_text += page.extract_text()
-        if(debug):
+        if (debug):
             st.write(pdf_text)
 
-        #nlp = spacy.load("pt_core_news_sm")
-        
-        #nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
-        #nlp.enable_pipe("senter")
-        #doc = nlp(pdf_text)
-        #tam = 0
-        #sequences = []
-        #for i, sent in enumerate(doc.sents):
+        # nlp = spacy.load("pt_core_news_sm")
+
+        # nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
+        # nlp.enable_pipe("senter")
+        # doc = nlp(pdf_text)
+        # tam = 0
+        # sequences = []
+        # for i, sent in enumerate(doc.sents):
         #    sequences.append(sent.text)
         #    if(debug):
         #        st.write(i,len(sent.text),sent.text)
         #        if(len(sent.text)>tam):
         #            tam = len(sent.text)
-                    
+
         sequences = pdf_text.split('\n\n')
         tam = 0
         for i, sent in enumerate(sequences):
-            if(debug):
-                st.write(i,len(sent),sent)
-                if(len(sent)>tam):
-                    tam = len(sent)                   
-        if(debug):
+            if (debug):
+                st.write(i, len(sent), sent)
+                if (len(sent) > tam):
+                    tam = len(sent)
+        if (debug):
             st.write("Maior sequence =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area5")
     if uploaded_file is not None:
         for i, item in enumerate(sequences):
-            if(not item.isspace()):
+            if (not item.isspace()):
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-                st.write(ner_displacy,unsafe_allow_html=True)
+                st.write(ner_displacy, unsafe_allow_html=True)
                 my_table = st.table(ner_df)
+
 
 ### NER via API sobre o texto de exemplo
 
@@ -250,51 +260,54 @@ def query(payload):
     response = requests.request("POST", API_URL, headers=headers, data=data)
     return json.loads(response.content.decode("utf-8"))
 
+
 def ajusta_retorno_api(data):
-  new_data = []
-  new_i = -1
-  for i, item in enumerate(data):
-    if(item["word"][:2] == "##"):
-      new_data[new_i]["word"] += item["word"][2:]
-      new_data[new_i]["end"] = item["end"]
-    else:
-      new_data.append(item)
-      new_i +=1
-  return new_data
+    new_data = []
+    new_i = -1
+    for i, item in enumerate(data):
+        if (item["word"][:2] == "##"):
+            new_data[new_i]["word"] += item["word"][2:]
+            new_data[new_i]["end"] = item["end"]
+        else:
+            new_data.append(item)
+            new_i += 1
+    return new_data
+
 
 def mostra_ner(texto, ajusta_retorno=False):
-    #data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
+    # data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
     data = query({"inputs": texto})
-    if("error" in data):
+    if ("error" in data):
         return data["error"]
-    #"error":"Model Luciano/bertimbau-large-lener_br is currently loading"
-                    
-    if(ajusta_retorno):
-      data = ajusta_retorno_api(data)
-    
+    # "error":"Model Luciano/bertimbau-large-lener_br is currently loading"
+
+    if (ajusta_retorno):
+        data = ajusta_retorno_api(data)
+
     ents = []
     for item in data:
-      item = {"label" if k == "entity_group" else k:v for k,v in item.items()}
-      ents.append(item);
+        item = {"label" if k == "entity_group" else k: v for k, v in item.items()}
+        ents.append(item)
 
     ex = [{"text": texto,
-          "ents": ents,
-          "title": None}]
-    return displacy.render(ex, style="ent", options=options, manual=True)    
+           "ents": ents,
+           "title": None}]
+    return displacy.render(ex, style="ent", options=options, manual=True)
+
 
 st.subheader('Resultado do texto de exemplo via Huggingface Inference API')
-st.write(mostra_ner(txt, ajusta_retorno=True),unsafe_allow_html=True)
+st.write(mostra_ner(txt, ajusta_retorno=True), unsafe_allow_html=True)
 
-if(debug):
+if (debug):
     data = query({"inputs": txt})
     st.write(data)
-    if(not "error" in data):
+    if (not "error" in data):
         data = ajusta_retorno_api(data)
         st.write(data)
-  
-#if st.sidebar.button('Enviar', key='bt_enviar'):
+
+# if st.sidebar.button('Enviar', key='bt_enviar'):
 #   st.sidebar.write('Why hello there')
-#else:
+# else:
 #   st.sidebar.write('Goodbye')
 #
-#st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
+# st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
