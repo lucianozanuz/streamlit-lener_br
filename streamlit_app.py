@@ -24,7 +24,7 @@ st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizand
 
 modelo = st.sidebar.radio(
     "Modelo treinado",
-    ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'))
+    ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'),index=1)
 API_URL = "https://api-inference.huggingface.co/models/" + modelo
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
@@ -38,7 +38,8 @@ opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
     ('Exemplo 1', 'Exemplo 2', 'Exemplo 3', 'Exemplo 4', 'Vazio'))
 if (opt_txt_exemplo == "Exemplo 1"):
-    txt_exemplo = "Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil."
+    txt_exemplo = "Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil." \
+                  "Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil."
 elif (opt_txt_exemplo == "Exemplo 2"):
     txt_exemplo = "Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil."
 elif (opt_txt_exemplo == "Exemplo 3"):
