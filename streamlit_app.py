@@ -38,8 +38,10 @@ opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
     ('Exemplo 1', 'Exemplo 2', 'Exemplo 3', 'Exemplo 4', 'Vazio'))
 if (opt_txt_exemplo == "Exemplo 1"):
-    txt_exemplo = "Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil." \
-                  "Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil."
+    txt_exemplo = '''
+Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil.
+Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil.
+'''
 elif (opt_txt_exemplo == "Exemplo 2"):
     txt_exemplo = "Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil."
 elif (opt_txt_exemplo == "Exemplo 3"):
