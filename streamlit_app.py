@@ -130,9 +130,8 @@ def carrega_modelo(modelo):
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
     return modelo_treinado
 
-# @st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
 # @st.cache(allow_output_mutation=True, max_entries=5, ttl=300)  # Parâmetro necessário para não dar erro de hash
-@st.cache
+@st.cache(hash_funcs={tokenizers.Tokenizer: my_hash_func})
 def carrega_tokenizer(modelo):
     tokenizer_treinado = AutoTokenizer.from_pretrained(modelo)
     return tokenizer_treinado
