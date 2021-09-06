@@ -70,7 +70,7 @@ else:
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF",
                                          help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
-inclui_api = st.sidebar.checkbox('Inclui resultado da API')
+inclui_api = st.sidebar.checkbox('Inclui resultado via Inference API')
 
 modelo = st.sidebar.radio(
     "Modelo treinado",
