@@ -70,6 +70,8 @@ else:
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF",
                                          help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
+inclui_api = st.sidebar.checkbox('Inclui resultado da API')
+
 modelo = st.sidebar.radio(
     "Modelo treinado",
     ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'), index=0)
@@ -85,8 +87,6 @@ aggregation_strategy = st.sidebar.radio(
 opt_pdf = st.sidebar.radio(
     'Processamento do PDF',
     ('pdfminer', 'pdfminer por frase', 'pdfplumber', 'pdfplumber por frase'))
-
-inclui_api = st.sidebar.checkbox('Inclui resultado da API')
 
 debug = st.sidebar.checkbox('Debug')
 if (debug):
