@@ -22,30 +22,17 @@ st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizand
 
 ### Parâmetros do processamento
 
-modelo = st.sidebar.radio(
-    "Modelo treinado",
-    ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'), index=0)
-API_URL = "https://api-inference.huggingface.co/models/" + modelo
-API_TOKEN = st.secrets["api_token"]
-headers = {"Authorization": f"Bearer {API_TOKEN}"}
-
-aggregation_strategy = st.sidebar.radio(
-    "Aggregation strategy",
-    ('simple', 'first', 'average', 'max'),
-    index=2)
-
 opt_txt_exemplo = st.sidebar.selectbox(
     'Texto de exemplo',
-    ('Exemplo 1', 'Exemplo 2', 'Exemplo 3', 'Exemplo 4', 'Vazio'))
+    ('Exemplo 1', 'Exemplo 2', 'Vazio'))
+#     ('Exemplo 1', 'Exemplo 3', 'Exemplo 4', 'Vazio'))
+# if (opt_txt_exemplo == "Exemplo 1"):
+#     txt_exemplo = '''Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil.
+# Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil.
+# '''
+# elif (opt_txt_exemplo == "Exemplo 2"):
 if (opt_txt_exemplo == "Exemplo 1"):
-    txt_exemplo = '''
-Meu nome é João da Silva e eu moro em Porto Alegre, Rio Grande do Sul, Brasil.
-Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil.
-'''
-elif (opt_txt_exemplo == "Exemplo 2"):
-    txt_exemplo = "Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil."
-elif (opt_txt_exemplo == "Exemplo 3"):
-    txt_exemplo = '''A C Ó R D Ã O
+        txt_exemplo = '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
 Relatora, DIAULAS COSTA RIBEIRO - 1º Vogal, EUSTÁQUIO DE CASTRO - 2º
@@ -54,7 +41,8 @@ em proferir a seguinte decisão: RECURSO DE APELAÇÃO CONHECIDO E NÃO
 PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 '''
-elif (opt_txt_exemplo == "Exemplo 4"):
+# elif (opt_txt_exemplo == "Exemplo 3"):
+elif (opt_txt_exemplo == "Exemplo 2"):
     txt_exemplo = '''EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
 REF.
 AUTOS Nº : 5000307-41.2020.8.21.5001
@@ -81,6 +69,18 @@ else:
 
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF",
                                          help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
+
+modelo = st.sidebar.radio(
+    "Modelo treinado",
+    ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'), index=0)
+API_URL = "https://api-inference.huggingface.co/models/" + modelo
+API_TOKEN = st.secrets["api_token"]
+headers = {"Authorization": f"Bearer {API_TOKEN}"}
+
+aggregation_strategy = st.sidebar.radio(
+    "Aggregation strategy",
+    ('simple', 'first', 'average', 'max'),
+    index=2)
 
 opt_pdf = st.sidebar.radio(
     'Processamento do PDF',
@@ -257,7 +257,6 @@ def query(payload):
     response = requests.request("POST", API_URL, headers=headers, data=data)
     return json.loads(response.content.decode("utf-8"))
 
-
 def ajusta_retorno_api(data):
     new_data = []
     new_i = -1
@@ -269,7 +268,6 @@ def ajusta_retorno_api(data):
             new_data.append(item)
             new_i += 1
     return new_data
-
 
 def mostra_ner(texto, ajusta_retorno=False):
     # data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
@@ -290,7 +288,6 @@ def mostra_ner(texto, ajusta_retorno=False):
            "ents": ents,
            "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)
-
 
 st.subheader('Resultado do texto de exemplo via Huggingface Inference API')
 st.write(mostra_ner(txt, ajusta_retorno=True), unsafe_allow_html=True)
