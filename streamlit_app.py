@@ -86,6 +86,8 @@ opt_pdf = st.sidebar.radio(
     'Processamento do PDF',
     ('pdfminer', 'pdfminer por frase', 'pdfplumber', 'pdfplumber por frase'))
 
+inclui_api = st.sidebar.checkbox('Inclui resultado da API')
+
 debug = st.sidebar.checkbox('Debug')
 if (debug):
     st.sidebar.write(st.session_state)
@@ -138,6 +140,59 @@ def carrega_tokenizer(modelo):
 
 modelo_treinado = carrega_modelo(modelo)
 tokenizer_treinado = carrega_tokenizer(modelo)
+
+
+### NER via API sobre o texto de exemplo
+
+def query(payload):
+    data = json.dumps(payload)
+    response = requests.request("POST", API_URL, headers=headers, data=data)
+    return json.loads(response.content.decode("utf-8"))
+
+
+def ajusta_retorno_api(data):
+    new_data = []
+    new_i = -1
+    for i, item in enumerate(data):
+        if (item["word"][:2] == "##"):
+            new_data[new_i]["word"] += item["word"][2:]
+            new_data[new_i]["end"] = item["end"]
+        else:
+            new_data.append(item)
+            new_i += 1
+    return new_data
+
+
+def mostra_ner(texto, ajusta_retorno=False):
+    # data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
+    data = query({"inputs": texto})
+    if ("error" in data):
+        return data["error"]
+    # "error":"Model Luciano/bertimbau-large-lener_br is currently loading"
+
+    if (ajusta_retorno):
+        data = ajusta_retorno_api(data)
+
+    ents = []
+    for item in data:
+        item = {"label" if k == "entity_group" else k: v for k, v in item.items()}
+        ents.append(item)
+
+    ex = [{"text": texto,
+           "ents": ents,
+           "title": None}]
+    return displacy.render(ex, style="ent", options=options, manual=True)
+
+if (inclui_api):
+    st.subheader('Resultado do texto de exemplo via Inference API')
+    st.write(mostra_ner(txt, ajusta_retorno=True), unsafe_allow_html=True)
+
+    if (debug):
+        data = query({"inputs": txt})
+        st.write(data)
+        if (not "error" in data):
+            data = ajusta_retorno_api(data)
+            st.write(data)
 
 ### NER via Pipeline sobre o texto de exemplo
 
@@ -249,59 +304,3 @@ elif (opt_pdf == "pdfplumber por frase"):
                 st.write(ner_displacy, unsafe_allow_html=True)
                 my_table = st.table(ner_df)
 
-
-### NER via API sobre o texto de exemplo
-
-def query(payload):
-    data = json.dumps(payload)
-    response = requests.request("POST", API_URL, headers=headers, data=data)
-    return json.loads(response.content.decode("utf-8"))
-
-def ajusta_retorno_api(data):
-    new_data = []
-    new_i = -1
-    for i, item in enumerate(data):
-        if (item["word"][:2] == "##"):
-            new_data[new_i]["word"] += item["word"][2:]
-            new_data[new_i]["end"] = item["end"]
-        else:
-            new_data.append(item)
-            new_i += 1
-    return new_data
-
-def mostra_ner(texto, ajusta_retorno=False):
-    # data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
-    data = query({"inputs": texto})
-    if ("error" in data):
-        return data["error"]
-    # "error":"Model Luciano/bertimbau-large-lener_br is currently loading"
-
-    if (ajusta_retorno):
-        data = ajusta_retorno_api(data)
-
-    ents = []
-    for item in data:
-        item = {"label" if k == "entity_group" else k: v for k, v in item.items()}
-        ents.append(item)
-
-    ex = [{"text": texto,
-           "ents": ents,
-           "title": None}]
-    return displacy.render(ex, style="ent", options=options, manual=True)
-
-st.subheader('Resultado do texto de exemplo via Inference API')
-st.write(mostra_ner(txt, ajusta_retorno=True), unsafe_allow_html=True)
-
-if (debug):
-    data = query({"inputs": txt})
-    st.write(data)
-    if (not "error" in data):
-        data = ajusta_retorno_api(data)
-        st.write(data)
-
-# if st.sidebar.button('Enviar', key='bt_enviar'):
-#   st.sidebar.write('Why hello there')
-# else:
-#   st.sidebar.write('Goodbye')
-#
-# st.sidebar.button('Enviar click', key='bt_enviar_click', on_click=processa_pdf)
