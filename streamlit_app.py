@@ -141,7 +141,7 @@ tokenizer_treinado = carrega_tokenizer(modelo)
 
 ### NER via Pipeline sobre o texto de exemplo
 
-st.subheader('Resultado do texto de exemplo via Huggingface Pipeline')
+st.subheader('Resultado do texto de exemplo')
 txt = st.text_area('Texto de exemplo', txt_exemplo, height=300, key="area1")
 ner_df, ner_displacy = ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy)
 st.write(ner_displacy, unsafe_allow_html=True)
@@ -149,7 +149,7 @@ my_table = st.table(ner_df)
 
 ### NER via pipeline sobre o texto do PDF
 
-st.subheader('Resultado do PDF via Huggingface Pipeline')
+st.subheader('Resultado do PDF')
 
 if (opt_pdf == "pdfminer"):
     pdf_text = ""
@@ -289,7 +289,7 @@ def mostra_ner(texto, ajusta_retorno=False):
            "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)
 
-st.subheader('Resultado do texto de exemplo via Huggingface Inference API')
+st.subheader('Resultado do texto de exemplo via Inference API')
 st.write(mostra_ner(txt, ajusta_retorno=True), unsafe_allow_html=True)
 
 if (debug):
