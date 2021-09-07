@@ -237,15 +237,15 @@ elif (opt_pdf == "pdfminer por frase"):
 
     txt_pdf = st.text_area('Texto do PDF via pdfminer por frase', pdf_text, height=300, key="area3")
     if uploaded_file is not None:
+        tbl = pd.DataFrame
         for i, item in enumerate(sequences):
-            tbl = pd.DataFrame
             if (not item.isspace()):
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
                 st.write(ner_displacy, unsafe_allow_html=True)
                 my_table = st.table(ner_df)
-                #frames = [tbl, ner_df]
+                frames = [tbl, ner_df]
                 #tbl = pd.concat(frames)
-            #my_table_concat = st.table(tbl)
+        my_table_concat = st.table(tbl)
 
 elif (opt_pdf == "pdfplumber"):
     pdf_text = ""
