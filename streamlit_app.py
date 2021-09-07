@@ -31,7 +31,7 @@ opt_txt_exemplo = st.sidebar.selectbox(
 # Meu nome é Juliano Silva e eu moro em Canoas, Rio Grande do Sul, Brasil.
 # '''
 # elif (opt_txt_exemplo == "Exemplo 2"):
-if (opt_txt_exemplo == "Exemplo 1"):
+if opt_txt_exemplo == "Exemplo 1":
         txt_exemplo = '''A C Ó R D Ã O
 Acordam os Senhores Desembargadores da 8ª TURMA CÍVEL do
 Tribunal de Justiça do Distrito Federal e Territórios, Nídia Corrêa Lima -
@@ -42,7 +42,7 @@ PROVIDO. UNÂNIME., de acordo com a ata do julgamento e notas taquigráficas.
 Brasilia(DF), 15 de Março de 2018.
 '''
 # elif (opt_txt_exemplo == "Exemplo 3"):
-elif (opt_txt_exemplo == "Exemplo 2"):
+elif opt_txt_exemplo == "Exemplo 2":
     txt_exemplo = '''EGRÉGIO TRIBUNAL DE JUSTIÇA DO ESTADO DO RIO GRANDE DO SUL
 REF.
 AUTOS Nº : 5000307-41.2020.8.21.5001
@@ -89,7 +89,7 @@ aggregation_strategy = st.sidebar.radio(
     index=2)
 
 debug = st.sidebar.checkbox('Debug')
-if (debug):
+if debug:
     st.sidebar.write(st.session_state)
 
 ### Processamento do pipeline
@@ -104,7 +104,7 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
 options = {"colors": colors}
 
 def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strategy):
-    if (texto == ""):
+    if texto == "":
         return pd.DataFrame(), texto
     ner = pipeline("ner", model=modelo_treinado, tokenizer=tokenizer_treinado,
                    aggregation_strategy=aggregation_strategy)
@@ -160,7 +160,7 @@ def ajusta_retorno_api(data):
     new_data = []
     new_i = -1
     for i, item in enumerate(data):
-        if (item["word"][:2] == "##"):
+        if item["word"][:2] == "##":
             new_data[new_i]["word"] += item["word"][2:]
             new_data[new_i]["end"] = item["end"]
         else:
@@ -171,11 +171,11 @@ def ajusta_retorno_api(data):
 def mostra_ner(texto, ajusta_retorno=False):
     # data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
     data = query({"inputs": texto})
-    if ("error" in data):
+    if "error" in data:
         return data["error"]
     # "error":"Model Luciano/bertimbau-large-lener_br is currently loading"
 
-    if (ajusta_retorno):
+    if ajusta_retorno:
         data = ajusta_retorno_api(data)
 
     ents = []
@@ -188,14 +188,14 @@ def mostra_ner(texto, ajusta_retorno=False):
            "title": None}]
     return displacy.render(ex, style="ent", options=options, manual=True)
 
-if (inclui_api):
+if inclui_api:
     st.subheader('Resultado do texto de exemplo via Inference API')
     st.write(mostra_ner(txt, ajusta_retorno=True), unsafe_allow_html=True)
 
-    if (debug):
+    if debug:
         data = query({"inputs": txt})
         st.write(data)
-        if (not "error" in data):
+        if not "error" in data:
             data = ajusta_retorno_api(data)
             st.write(data)
 
@@ -203,11 +203,11 @@ if (inclui_api):
 
 st.subheader('Resultado do PDF')
 
-if (opt_pdf == "pdfminer"):
+if opt_pdf == "pdfminer":
     pdf_text = ""
     if uploaded_file is not None:
         pdf_text = high_level.extract_text(uploaded_file)
-        if (debug):
+        if debug:
             for page_layout in high_level.extract_pages(uploaded_file):
                 for element in page_layout:
                     st.write(element)
@@ -218,20 +218,20 @@ if (opt_pdf == "pdfminer"):
         st.write(ner_displacy, unsafe_allow_html=True)
         my_table = st.table(ner_df)
 
-elif (opt_pdf == "pdfminer por frase"):
+elif opt_pdf == "pdfminer por frase":
     pdf_text = ""
     if uploaded_file is not None:
         pdf_text = high_level.extract_text(uploaded_file)
         sequences = pdf_text.split('\n\n')
 
-        if (debug):
+        if debug:
             for page_layout in high_level.extract_pages(uploaded_file):
                 for element in page_layout:
                     st.write(element)
             tam = 0
             for i, sent in enumerate(sequences):
                 st.write(i, len(sent), sent)
-                if (len(sent) > tam):
+                if len(sent) > tam:
                     tam = len(sent)
             st.write("Tamanho da maior frase =", tam)
 
@@ -239,23 +239,21 @@ elif (opt_pdf == "pdfminer por frase"):
     if uploaded_file is not None:
         tbl_df = pd.DataFrame()
         for i, item in enumerate(sequences):
-            if (not item.isspace()):
+            if not item.isspace():
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
                 st.write(ner_displacy, unsafe_allow_html=True)
                 st.table(ner_df)
-                #my_table = st.table(ner_df)
                 frames = [tbl_df, ner_df]
-                #result = pd.concat(frames)
                 tbl_df = pd.concat(frames, ignore_index=True)
         st.table(tbl_df)
 
-elif (opt_pdf == "pdfplumber"):
+elif opt_pdf == "pdfplumber":
     pdf_text = ""
     if uploaded_file is not None:
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 pdf_text += page.extract_text()
-        if (debug):
+        if debug:
             st.write(pdf_text)
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler', pdf_text, height=300, key="area4")
     if uploaded_file is not None:
@@ -263,13 +261,13 @@ elif (opt_pdf == "pdfplumber"):
         st.write(ner_displacy, unsafe_allow_html=True)
         my_table = st.table(ner_df)
 
-elif (opt_pdf == "pdfplumber por frase"):
+elif opt_pdf == "pdfplumber por frase":
     pdf_text = ""
     if uploaded_file is not None:
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 pdf_text += page.extract_text()
-        if (debug):
+        if debug:
             st.write(pdf_text)
 
         # nlp = spacy.load("pt_core_news_sm")
@@ -289,17 +287,17 @@ elif (opt_pdf == "pdfplumber por frase"):
         sequences = pdf_text.split('\n\n')
         tam = 0
         for i, sent in enumerate(sequences):
-            if (debug):
+            if debug:
                 st.write(i, len(sent), sent)
-                if (len(sent) > tam):
+                if len(sent) > tam:
                     tam = len(sent)
-        if (debug):
+        if debug:
             st.write("Tamanho da maior frase =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area5")
     if uploaded_file is not None:
         for i, item in enumerate(sequences):
-            if (not item.isspace()):
+            if not item.isspace():
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
                 st.write(ner_displacy, unsafe_allow_html=True)
                 my_table = st.table(ner_df)
