@@ -245,8 +245,8 @@ elif (opt_pdf == "pdfminer por frase"):
                 st.table(ner_df)
                 #my_table = st.table(ner_df)
                 frames = [tbl, ner_df]
-                tbl = pd.concat(frames)
-        st.table(tbl)
+                #tbl = pd.concat(frames)
+        #st.table(tbl)
 
 elif (opt_pdf == "pdfplumber"):
     pdf_text = ""
