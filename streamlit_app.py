@@ -209,10 +209,10 @@ if (opt_pdf == "pdfminer"):
     if uploaded_file is not None:
         pdf_text = high_level.extract_text(uploaded_file)
         if (debug):
-            st.write(pdf_text)
             for page_layout in high_level.extract_pages(uploaded_file):
                 for element in page_layout:
                     st.write(element)
+
     txt_pdf = st.text_area('Texto do PDF via pdfminer', pdf_text, height=300, key="area2")
     if uploaded_file is not None:
         ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
@@ -223,21 +223,18 @@ elif (opt_pdf == "pdfminer por frase"):
     pdf_text = ""
     if uploaded_file is not None:
         pdf_text = high_level.extract_text(uploaded_file)
+        sequences = pdf_text.split('\n\n')
+
         if (debug):
-            st.write(pdf_text)
             for page_layout in high_level.extract_pages(uploaded_file):
                 for element in page_layout:
                     st.write(element)
-
-        sequences = pdf_text.split('\n\n')
-        tam = 0
-        for i, sent in enumerate(sequences):
-            if (debug):
+            tam = 0
+            for i, sent in enumerate(sequences):
                 st.write(i, len(sent), sent)
                 if (len(sent) > tam):
                     tam = len(sent)
-        if (debug):
-            st.write("Maior sequence =", tam)
+            st.write("Tamanho da maior frase =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfminer por frase', pdf_text, height=300, key="area3")
     if uploaded_file is not None:
@@ -292,7 +289,7 @@ elif (opt_pdf == "pdfplumber por frase"):
                 if (len(sent) > tam):
                     tam = len(sent)
         if (debug):
-            st.write("Maior sequence =", tam)
+            st.write("Tamanho da maior frase =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area5")
     if uploaded_file is not None:
