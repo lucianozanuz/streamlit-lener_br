@@ -67,10 +67,14 @@ Porto Alegre/RS, 17 de julho de 2020.
 else:
     txt_exemplo = ""
 
+inclui_api = st.sidebar.checkbox('Inclui resultado via Inference API')
+
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF",
                                          help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
-inclui_api = st.sidebar.checkbox('Inclui resultado via Inference API')
+opt_pdf = st.sidebar.radio(
+    'Processamento do PDF',
+    ('pdfminer', 'pdfminer por frase', 'pdfplumber', 'pdfplumber por frase'))
 
 modelo = st.sidebar.radio(
     "Modelo treinado",
@@ -83,10 +87,6 @@ aggregation_strategy = st.sidebar.radio(
     "Aggregation strategy",
     ('simple', 'first', 'average', 'max'),
     index=2)
-
-opt_pdf = st.sidebar.radio(
-    'Processamento do PDF',
-    ('pdfminer', 'pdfminer por frase', 'pdfplumber', 'pdfplumber por frase'))
 
 debug = st.sidebar.checkbox('Debug')
 if (debug):
@@ -140,7 +140,6 @@ def carrega_tokenizer(modelo):
 
 modelo_treinado = carrega_modelo(modelo)
 tokenizer_treinado = carrega_tokenizer(modelo)
-
 
 ### NER via Pipeline sobre o texto de exemplo
 
