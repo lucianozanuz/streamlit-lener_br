@@ -242,10 +242,10 @@ elif (opt_pdf == "pdfminer por frase"):
             if (not item.isspace()):
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
                 st.write(ner_displacy, unsafe_allow_html=True)
-                my_table = st.table(ner_df)
+                #my_table = st.table(ner_df)
                 frames = [tbl, ner_df]
                 #tbl = pd.concat(frames)
-        my_table_concat = st.table(tbl)
+        st.table(tbl)
 
 elif (opt_pdf == "pdfplumber"):
     pdf_text = ""
