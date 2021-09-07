@@ -242,7 +242,8 @@ elif opt_pdf == "pdfminer por frase":
             if not item.isspace():
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
                 st.write(ner_displacy, unsafe_allow_html=True)
-                st.table(ner_df)
+                if debug:
+                    st.table(ner_df)
                 frames = [tbl_df, ner_df]
                 tbl_df = pd.concat(frames, ignore_index=True)
         st.table(tbl_df)
