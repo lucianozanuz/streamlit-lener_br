@@ -289,8 +289,8 @@ elif opt_pdf == "pdfplumber por frase":
         if debug:
             st.write(pdf_text)
 
-        # sequences = get_frases(pdf_text)
-        sequences = pdf_text.split('\n')
+        sequences = get_frases(pdf_text)
+        # sequences = pdf_text.split('\n')
         tam = 0
         for i, sent in enumerate(sequences):
             if debug:
