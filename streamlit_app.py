@@ -263,13 +263,12 @@ elif opt_pdf == "pdfplumber":
         my_table = st.table(ner_df)
 
 elif opt_pdf == "pdfplumber por frase":
-    pdf_text = " "
+    pdf_text = ""
     if uploaded_file is not None:
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 pdf_text += page.extract_text()
 
-        pdf_text.replace('\n', '')
         if debug:
             st.write(pdf_text)
 
