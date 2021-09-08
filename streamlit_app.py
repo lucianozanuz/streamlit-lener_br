@@ -203,6 +203,22 @@ if inclui_api:
 
 st.subheader('Resultado do PDF')
 
+
+def get_frases(pdf_text):
+    # nlp = spacy.load("pt_core_news_sm")
+    nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
+    nlp.enable_pipe("senter")
+    doc = nlp(pdf_text)
+    tam = 0
+    sequences = []
+    for i, sent in enumerate(doc.sents):
+        sequences.append(sent.text)
+        if (debug):
+            st.write(i, len(sent.text), sent.text)
+            if (len(sent.text) > tam):
+                tam = len(sent.text)
+    return sequences
+
 if opt_pdf == "pdfminer":
     pdf_text = ""
     if uploaded_file is not None:
@@ -273,20 +289,7 @@ elif opt_pdf == "pdfplumber por frase":
         if debug:
             st.write(pdf_text)
 
-        # nlp = spacy.load("pt_core_news_sm")
-
-        nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
-        nlp.enable_pipe("senter")
-        doc = nlp(pdf_text)
-        tam = 0
-        sequences = []
-        for i, sent in enumerate(doc.sents):
-           sequences.append(sent.text)
-           if(debug):
-               st.write(i,len(sent.text),sent.text)
-               if(len(sent.text)>tam):
-                   tam = len(sent.text)
-
+        sequences = get_frases(pdf_text)
         # sequences = pdf_text.split('\n')
         # tam = 0
         # for i, sent in enumerate(sequences):
@@ -294,8 +297,8 @@ elif opt_pdf == "pdfplumber por frase":
         #         st.write(i, len(sent), sent)
         #         if len(sent) > tam:
         #             tam = len(sent)
-        if debug:
-            st.write("Tamanho da maior frase =", tam)
+        # if debug:
+        #     st.write("Tamanho da maior frase =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area5")
     if uploaded_file is not None:
