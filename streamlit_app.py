@@ -285,12 +285,12 @@ elif opt_pdf == "pdfplumber por frase":
             for page in pdf.pages:
                 pdf_text += page.extract_text()
 
-        pdf_text.replace('\n', ' ')
+        pdf_text.replace('\n', '')
         if debug:
             st.write('pdf_text =', pdf_text)
 
-        # sequences = get_frases(pdf_text)
-        sequences = pdf_text.split('\n')
+        sequences = get_frases(pdf_text)
+        # sequences = pdf_text.split('\n')
         tam = 0
         for i, sent in enumerate(sequences):
             if debug:
