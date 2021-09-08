@@ -285,7 +285,7 @@ elif opt_pdf == "pdfplumber por frase":
         #        if(len(sent.text)>tam):
         #            tam = len(sent.text)
 
-        sequences = pdf_text.split('\n\n')
+        sequences = pdf_text.split('\n')
         tam = 0
         for i, sent in enumerate(sequences):
             if debug:
