@@ -289,16 +289,16 @@ elif opt_pdf == "pdfplumber por frase":
         if debug:
             st.write(pdf_text)
 
-        sequences = get_frases(pdf_text)
-        # sequences = pdf_text.split('\n')
-        # tam = 0
-        # for i, sent in enumerate(sequences):
-        #     if debug:
-        #         st.write(i, len(sent), sent)
-        #         if len(sent) > tam:
-        #             tam = len(sent)
-        # if debug:
-        #     st.write("Tamanho da maior frase =", tam)
+        # sequences = get_frases(pdf_text)
+        sequences = pdf_text.split('\n')
+        tam = 0
+        for i, sent in enumerate(sequences):
+            if debug:
+                st.write(i, len(sent), sent)
+                if len(sent) > tam:
+                    tam = len(sent)
+        if debug:
+            st.write("Tamanho da maior frase =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area5")
     if uploaded_file is not None:
