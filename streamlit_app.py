@@ -268,10 +268,10 @@ elif opt_pdf == "pdfplumber por frase":
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 pdf_text += page.extract_text()
+
+        pdf_text.replace('\n', '')
         if debug:
             st.write(pdf_text)
-
-        pdf_text.replace("\n", "")
 
         # nlp = spacy.load("pt_core_news_sm")
 
