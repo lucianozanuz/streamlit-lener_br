@@ -271,6 +271,8 @@ elif opt_pdf == "pdfplumber por frase":
         if debug:
             st.write(pdf_text)
 
+        pdf_text.replace("\n", "")
+
         # nlp = spacy.load("pt_core_news_sm")
 
         nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
