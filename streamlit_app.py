@@ -273,35 +273,29 @@ elif opt_pdf == "pdfplumber por frase":
 
         # nlp = spacy.load("pt_core_news_sm")
 
-        # nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
-        # nlp.enable_pipe("senter")
-        # doc = nlp(pdf_text)
-        # tam = 0
-        # sequences = []
-        # for i, sent in enumerate(doc.sents):
-        #    sequences.append(sent.text)
-        #    if(debug):
-        #        st.write(i,len(sent.text),sent.text)
-        #        if(len(sent.text)>tam):
-        #            tam = len(sent.text)
-
-        sequences = pdf_text.split('\n')
+        nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
+        nlp.enable_pipe("senter")
+        doc = nlp(pdf_text)
         tam = 0
-        for i, sent in enumerate(sequences):
-            if debug:
-                st.write(i, len(sent), sent)
-                if len(sent) > tam:
-                    tam = len(sent)
+        sequences = []
+        for i, sent in enumerate(doc.sents):
+           sequences.append(sent.text)
+           if(debug):
+               st.write(i,len(sent.text),sent.text)
+               if(len(sent.text)>tam):
+                   tam = len(sent.text)
+
+        # sequences = pdf_text.split('\n')
+        # tam = 0
+        # for i, sent in enumerate(sequences):
+        #     if debug:
+        #         st.write(i, len(sent), sent)
+        #         if len(sent) > tam:
+        #             tam = len(sent)
         if debug:
             st.write("Tamanho da maior frase =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area5")
-    # if uploaded_file is not None:
-    #     for i, item in enumerate(sequences):
-    #         if not item.isspace():
-    #             ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-    #             st.write(ner_displacy, unsafe_allow_html=True)
-    #             my_table = st.table(ner_df)
     if uploaded_file is not None:
         tbl_df = pd.DataFrame()
         for i, item in enumerate(sequences):
