@@ -296,10 +296,20 @@ elif opt_pdf == "pdfplumber por frase":
             st.write("Tamanho da maior frase =", tam)
 
     txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area5")
+    # if uploaded_file is not None:
+    #     for i, item in enumerate(sequences):
+    #         if not item.isspace():
+    #             ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+    #             st.write(ner_displacy, unsafe_allow_html=True)
+    #             my_table = st.table(ner_df)
     if uploaded_file is not None:
+        tbl_df = pd.DataFrame()
         for i, item in enumerate(sequences):
             if not item.isspace():
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
                 st.write(ner_displacy, unsafe_allow_html=True)
-                my_table = st.table(ner_df)
-
+                if debug:
+                    st.table(ner_df)
+                frames = [tbl_df, ner_df]
+                tbl_df = pd.concat(frames, ignore_index=True)
+        st.table(tbl_df)
