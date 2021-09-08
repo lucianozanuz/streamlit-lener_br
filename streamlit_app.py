@@ -312,7 +312,9 @@ elif opt_pdf == "pdfplumber por frase":
                 frames = [tbl_df, ner_df]
                 tbl_df = pd.concat(frames, ignore_index=True)
         st.table(tbl_df)
+
+        tbl_csv = tbl_df.to_csv()
         st.download_button(
-            label = 'Download CSV', data = tbl_df,
+            label = 'Download CSV', data = tbl_csv,
             file_name = 'file.csv', mime = 'text/csv'
             )
