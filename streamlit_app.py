@@ -306,7 +306,7 @@ elif opt_pdf == "pdfplumber por frase":
         if debug:
             tam = 0
             for i, sent in enumerate(sequences):
-                st.write(i, len(sent), sent)
+                st.write('Frase =', i, len(sent), sent)
                 if len(sent) > tam:
                     tam = len(sent)
             st.write("Tamanho da maior frase =", tam)
