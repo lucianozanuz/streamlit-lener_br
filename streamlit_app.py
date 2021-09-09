@@ -219,6 +219,15 @@ def get_frases(pdf_text):
                 tam = len(sent.text)
     return sequences
 
+
+def download_csv(tbl_df):
+    tbl_csv = tbl_df.to_csv()
+    st.download_button(
+        label='Download CSV', data=tbl_csv,
+        file_name='entidades.csv', mime='text/csv'
+    )
+
+
 if opt_pdf == "pdfminer":
     pdf_text = ""
     if uploaded_file is not None:
@@ -232,7 +241,8 @@ if opt_pdf == "pdfminer":
     if uploaded_file is not None:
         ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
         st.write(ner_displacy, unsafe_allow_html=True)
-        my_table = st.table(ner_df)
+        st.table(ner_df)
+        download_csv(ner_df)
 
 elif opt_pdf == "pdfminer por frase":
     pdf_text = ""
@@ -263,6 +273,7 @@ elif opt_pdf == "pdfminer por frase":
                 frames = [tbl_df, ner_df]
                 tbl_df = pd.concat(frames, ignore_index=True)
         st.table(tbl_df)
+        download_csv(tbl_df)
 
 elif opt_pdf == "pdfplumber":
     pdf_text = ""
@@ -276,7 +287,8 @@ elif opt_pdf == "pdfplumber":
     if uploaded_file is not None:
         ner_df, ner_displacy = ner_pipeline(txt_pdf, modelo_treinado, tokenizer_treinado, aggregation_strategy)
         st.write(ner_displacy, unsafe_allow_html=True)
-        my_table = st.table(ner_df)
+        st.table(ner_df)
+        download_csv(ner_df)
 
 elif opt_pdf == "pdfplumber por frase":
     pdf_text = ""
@@ -312,9 +324,4 @@ elif opt_pdf == "pdfplumber por frase":
                 frames = [tbl_df, ner_df]
                 tbl_df = pd.concat(frames, ignore_index=True)
         st.table(tbl_df)
-
-        tbl_csv = tbl_df.to_csv()
-        st.download_button(
-            label = 'Download CSV', data = tbl_csv,
-            file_name = 'file.csv', mime = 'text/csv'
-            )
+        download_csv(tbl_df)
