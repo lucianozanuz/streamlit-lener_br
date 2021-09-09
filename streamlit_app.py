@@ -72,9 +72,12 @@ inclui_api = st.sidebar.checkbox('Inclui resultado via Inference API')
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF",
                                          help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
-opt_pdf = st.sidebar.radio(
-    'Processamento do PDF',
-    ('pdfminer', 'pdfminer por frase', 'pdfplumber', 'pdfplumber por frase'))
+inclui_displacy = st.sidebar.checkbox('Inclui texto do PDF com entidades marcadas')
+
+# opt_pdf = st.sidebar.radio(
+#     'Processamento do PDF',
+#     ('pdfminer', 'pdfminer por frase', 'pdfplumber', 'pdfplumber por frase'))
+opt_pdf = 'pdfplumber por frase'
 
 modelo = st.sidebar.radio(
     "Modelo treinado",
@@ -317,7 +320,8 @@ elif opt_pdf == "pdfplumber por frase":
         for i, item in enumerate(sequences):
             if not item.isspace():
                 ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
-                st.write(ner_displacy, unsafe_allow_html=True)
+                if inclui_displacy:
+                    st.write(ner_displacy, unsafe_allow_html=True)
                 if debug:
                     st.table(ner_df)
                 frames = [tbl_df, ner_df]
