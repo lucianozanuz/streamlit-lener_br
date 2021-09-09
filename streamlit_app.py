@@ -209,15 +209,10 @@ def get_frases(pdf_text):
     nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
     nlp.enable_pipe("senter")
     doc = nlp(pdf_text)
-    tam = 0
-    sequences = []
-    for i, sent in enumerate(doc.sents):
-        sequences.append(sent.text)
-        if (debug):
-            st.write(i, len(sent.text), sent.text)
-            if (len(sent.text) > tam):
-                tam = len(sent.text)
-    return sequences
+    # sequences = []
+    # for i, sent in enumerate(doc.sents):
+    #     sequences.append(sent.text)
+    return doc.sents
 
 
 def download_csv(tbl_df):
