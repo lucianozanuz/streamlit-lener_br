@@ -128,12 +128,12 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
 
 # @st.cache(max_entries=5, ttl=300)
 @st.cache
-def carrega_modelo(modelo):
+def carrega_modelo(modelo, ttl=600):
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
     return modelo_treinado
 
 # @st.cache(allow_output_mutation=True, max_entries=5, ttl=300)  # Parâmetro necessário para não dar erro de hash
-@st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True, ttl=600)
 def carrega_tokenizer(modelo):
     tokenizer_treinado = AutoTokenizer.from_pretrained(modelo)
     return tokenizer_treinado
@@ -209,9 +209,9 @@ def get_frases(pdf_text):
     nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
     nlp.enable_pipe("senter")
     doc = nlp(pdf_text)
-    # sequences = []
-    # for i, sent in enumerate(doc.sents):
-    #     sequences.append(sent.text)
+    sequences = []
+    for i, sent in enumerate(doc.sents):
+        sequences.append(sent.text)
     return doc.sents
 
 
