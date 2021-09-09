@@ -72,7 +72,7 @@ inclui_api = st.sidebar.checkbox('Inclui resultado via Inference API')
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF",
                                          help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
-inclui_displacy = st.sidebar.checkbox('Inclui texto do PDF com entidades marcadas')
+inclui_displacy = st.sidebar.checkbox('Exibe texto com entidades marcadas')
 
 # opt_pdf = st.sidebar.radio(
 #     'Processamento do PDF',
