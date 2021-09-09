@@ -213,7 +213,7 @@ def get_frases(pdf_text):
     sequences = []
     for i, sent in enumerate(doc.sents):
         sequences.append(sent.text)
-    return doc.sents
+    return sequences
 
 
 def download_csv(tbl_df):
