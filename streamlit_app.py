@@ -244,6 +244,11 @@ elif opt_pdf == "pdfminer por frase":
     pdf_text = ""
     if uploaded_file is not None:
         pdf_text = high_level.extract_text(uploaded_file)
+
+        pdf_text.replace('\n', '')
+        if debug:
+            st.write('pdf_text =', pdf_text)
+
         sequences = pdf_text.split('\n\n')
 
         if debug:
