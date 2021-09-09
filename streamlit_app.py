@@ -297,7 +297,7 @@ elif opt_pdf == "pdfplumber por frase":
                 pdf_text += page.extract_text()
 
         #pdf_text.replace('\n', '')
-        pdf_text = pdf_text.replace('\n', '')
+        # pdf_text = pdf_text.replace('\n', '')
         if debug:
             st.write('pdf_text =', pdf_text)
 
