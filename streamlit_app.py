@@ -127,14 +127,13 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
     return ner_df, ner_displacy
 
 # @st.cache(max_entries=5, ttl=300)
-# @st.cache(ttl=600, persist=True)
-@st.cache(ttl=600)
+@st.cache(ttl=600, persist=True)
 def carrega_modelo(modelo):
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
     return modelo_treinado
 
 # @st.cache(allow_output_mutation=True, max_entries=5, ttl=300)  # Parâmetro necessário para não dar erro de hash
-@st.cache(allow_output_mutation=True, ttl=600)
+@st.cache(allow_output_mutation=True, ttl=600, persist=True)
 def carrega_tokenizer(modelo):
     tokenizer_treinado = AutoTokenizer.from_pretrained(modelo)
     return tokenizer_treinado
