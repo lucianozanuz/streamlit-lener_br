@@ -145,7 +145,7 @@ def carrega_modelo(modelo):
 # @st.cache(suppress_st_warning=True, allow_output_mutation=True)
 @st.cache(suppress_st_warning=True, hash_funcs={tokenizers.Tokenizer: lambda _: None})
 def carrega_tokenizer(modelo):
-    st.write('Cache miss: carreg a_tokenizer(',modelo,')')
+    st.write('Cache miss: carrega_tokenizer(',modelo,')')
     tokenizer_treinado = AutoTokenizer.from_pretrained(modelo)
     return tokenizer_treinado
 
