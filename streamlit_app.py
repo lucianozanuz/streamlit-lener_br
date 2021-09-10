@@ -132,7 +132,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
 # @st.cache(max_entries=5, ttl=300)
 # @st.cache(ttl=600, persist=True)
 # @st.cache(allow_output_mutation=True, ttl=3600)
-@st.cache(ttl=86400)
+@st.cache(max_entries=2, ttl=86400)
 def carrega_modelo(modelo):
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
     return modelo_treinado
