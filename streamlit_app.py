@@ -79,9 +79,10 @@ inclui_displacy = st.sidebar.checkbox('Exibe texto com entidades marcadas')
 #     ('pdfminer', 'pdfminer por frase', 'pdfplumber', 'pdfplumber por frase'))
 opt_pdf = 'pdfplumber por frase'
 
-modelo = st.sidebar.radio(
-    "Modelo treinado",
-    ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'), index=1)
+# modelo = st.sidebar.radio(
+#     "Modelo treinado",
+#     ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'), index=1)
+modelo = 'Luciano/bertimbau-base-lener_br'
 API_URL = "https://api-inference.huggingface.co/models/" + modelo
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
@@ -133,6 +134,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
 # @st.cache(ttl=600, persist=True)
 # @st.cache(allow_output_mutation=True, ttl=3600)
 # @st.cache(max_entries=1, ttl=300)
+@st.cache
 def carrega_modelo(modelo):
     st.write('Cache miss: carrega_modelo(',modelo,')')
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
@@ -327,7 +329,8 @@ elif opt_pdf == "pdfplumber por frase":
         tbl_df = pd.DataFrame()
         for i, item in enumerate(sequences):
             if not item.isspace():
-                ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
+                with st.spinner('Processando entidades...'):
+                    ner_df, ner_displacy = ner_pipeline(item, modelo_treinado, tokenizer_treinado, aggregation_strategy)
                 if inclui_displacy:
                     st.write(ner_displacy, unsafe_allow_html=True)
                 if debug:
