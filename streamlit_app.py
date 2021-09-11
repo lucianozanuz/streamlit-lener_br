@@ -72,7 +72,7 @@ inclui_api = st.sidebar.checkbox('Inclui resultado via Inference API')
 uploaded_file = st.sidebar.file_uploader("Selecione um PDF",
                                          help="Selecione um arquivo em PDF referente a uma petição ou texto jurídico.")
 
-inclui_displacy = st.sidebar.checkbox('Exibe texto com entidades marcadas')
+inclui_displacy = st.sidebar.checkbox('Destaca entidades no texto')
 
 # opt_pdf = st.sidebar.radio(
 #     'Processamento do PDF',
@@ -87,12 +87,13 @@ API_URL = "https://api-inference.huggingface.co/models/" + modelo
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
-aggregation_strategy = st.sidebar.radio(
-    "Aggregation strategy",
-    ('simple', 'first', 'average', 'max'),
-    index=2)
+# aggregation_strategy = st.sidebar.radio(
+#     "Aggregation strategy",
+#     ('simple', 'first', 'average', 'max'),
+#     index=2)
+aggregation_strategy = 'average'
 
-debug = st.sidebar.checkbox('Debug')
+# debug = st.sidebar.checkbox('Debug')
 if debug:
     st.sidebar.write(st.session_state)
 
