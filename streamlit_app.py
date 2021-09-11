@@ -20,6 +20,7 @@ st.title('Reconhecimento de Entidades Nomeadas Jurídicas')
 # st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
 st.write('A Web App by [Tyler Richards](http://www.tylerjrichards.com)')
+st.markdown('A Web App by [Tyler Richards](http://www.tylerjrichards.com)')
 
 ### Parâmetros do processamento
 
