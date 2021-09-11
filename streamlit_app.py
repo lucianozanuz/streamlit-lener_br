@@ -30,7 +30,7 @@ with st.expander('Need help? 👉'):
 
 with st.expander("See explanation"):
     st.write("""
-         The chart above shows some numbers I picked for you.
+         The chart above shows some numbers I picked for you.  
          I rolled actual dice for these, so they're *guaranteed* to
          be random.
     """)
