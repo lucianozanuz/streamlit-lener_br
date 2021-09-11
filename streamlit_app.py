@@ -23,6 +23,10 @@ st.title('Reconhecimento de Entidades Nomeadas Jurídicas')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
 st.write('Por favor, ao final da sua avaliação, responda ao [questionário](http://www.questionario.com).')
 
+with st.expander('Need help? 👉'):
+    st.markdown(
+        "Having trouble finding your Goodreads profile? Head to the [Goodreads website](https://www.goodreads.com/) and click profile in the top right corner.")
+
 ### Parâmetros do processamento
 
 opt_txt_exemplo = st.sidebar.selectbox(
