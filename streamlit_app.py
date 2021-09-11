@@ -25,7 +25,15 @@ st.write('Por favor, ao final da sua avaliação, responda ao [questionário](ht
 
 with st.expander('Need help? 👉'):
     st.markdown(
-        "Having trouble finding your Goodreads profile? Head to the [Goodreads website](https://www.goodreads.com/) and click profile in the top right corner.")
+        "Having trouble finding your Goodreads profile? Head to the [Goodreads website](https://www.goodreads.com/) and click profile in the top right corner."
+    )
+
+with st.expander("See explanation"):
+    st.write("""
+         The chart above shows some numbers I picked for you.
+         I rolled actual dice for these, so they're *guaranteed* to
+         be random.
+    """)
 
 ### Parâmetros do processamento
 
