@@ -28,7 +28,7 @@ st.title('Reconhecimento de Entidades Nomeadas Jurídicas')
 # st.header('Header da aplicação.')
 # st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
-st.write('Por favor, ao final da sua avaliação, responda ao [questionário](http://www.questionario.com)'.)
+st.write('Por favor, ao final da sua avaliação, responda ao [questionário](http://www.questionario.com).')
 
 ### Parâmetros do processamento
 
