@@ -94,6 +94,7 @@ headers = {"Authorization": f"Bearer {API_TOKEN}"}
 aggregation_strategy = 'average'
 
 # debug = st.sidebar.checkbox('Debug')
+debug = False
 if debug:
     st.sidebar.write(st.session_state)
 
