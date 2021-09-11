@@ -15,15 +15,6 @@ from pdfminer import high_level
 
 import pdfplumber
 
-
-import time
-with st.empty():
-    for seconds in range(60):
-        st.write(f"⏳ {seconds} seconds have passed")
-        time.sleep(1)
-    st.write("✔️ 1 minute over!")
-
-
 st.title('Reconhecimento de Entidades Nomeadas Jurídicas')
 # st.header('Header da aplicação.')
 # st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
@@ -352,3 +343,5 @@ elif opt_pdf == "pdfplumber por frase":
                 tbl_df = pd.concat(frames, ignore_index=True)
         st.table(tbl_df)
         download_csv(tbl_df)
+
+st.help(ner_df)
