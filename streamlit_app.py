@@ -137,7 +137,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
 # @st.cache(allow_output_mutation=True, ttl=3600)
 # @st.cache(max_entries=1, ttl=300)
 # @st.cache(suppress_st_warning=True)
-@st.cache(suppress_st_warning=True, hash_funcs={AutoModelForTokenClassification: lambda _: None})
+@st.cache(suppress_st_warning=True, hash_funcs={AutoModelForTokenClassification: lambda _: None}, ttl=3600)
 def carrega_modelo(modelo):
     st.write('Cache miss: carrega_modelo(',modelo,')')
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
@@ -145,7 +145,7 @@ def carrega_modelo(modelo):
 
 # @st.cache(allow_output_mutation=True, max_entries=5, ttl=300)  # Parâmetro necessário para não dar erro de hash
 # @st.cache(allow_output_mutation=True, ttl=3600)
-@st.cache(suppress_st_warning=True, allow_output_mutation=True)
+@st.cache(suppress_st_warning=True, allow_output_mutation=True, ttl=3600)
 def carrega_tokenizer(modelo):
     st.write('Cache miss: carrega_tokenizer(',modelo,')')
     tokenizer_treinado = AutoTokenizer.from_pretrained(modelo)
