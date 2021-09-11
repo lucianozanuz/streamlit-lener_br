@@ -21,7 +21,6 @@ st.title('Reconhecimento de Entidades Nomeadas Jurídicas')
 # st.header('Header da aplicação.')
 # st.subheader('This model is a fine-tuned version of neuralmind/bert-large-portuguese-cased on the lener_br dataset')
 st.text('Modelo de aprendizado profundo treinado a partir do BERTimbau utilizando o dataset LeNER-Br')
-st.write('Por favor, ao final da sua avaliação, responda ao [questionário](http://www.questionario.com).')
 
 with st.expander('Leia-me 👉'):
     st.markdown(
@@ -32,6 +31,7 @@ with st.expander('Leia-me 👉'):
          I rolled actual dice for these, so they're *guaranteed* to
          be random.
     """)
+st.write('Por favor, ao final da sua avaliação, responda ao [questionário](http://www.questionario.com).')
 
 ### Parâmetros do processamento
 
@@ -355,5 +355,3 @@ elif opt_pdf == "pdfplumber por frase":
                 tbl_df = pd.concat(frames, ignore_index=True)
         st.table(tbl_df)
         download_csv(tbl_df)
-
-st.help(ner_df)
