@@ -34,6 +34,14 @@ with st.expander('Leia-me 👉'):
          O dataset utilizado para o treinamento foi o [LeNER-Br](https://cic.unb.br/~teodecampos/LeNER-Br/), que contém, na sua maioria, textos de ementas de tribunais superiores.  
          O modelo, portanto, não foi treinado com textos de petições de advogados, sendo que esta é uma das hipóteses que se quer avaliar como oportunidade de melhoria para trabalhos futuros.
     """)
+    st.write("""
+         O objetivo desta aplicação é avaliar o uso de inteligência artificial aplicada ao Direito, mais especificamente do reconhecimento de entidades nomeadas em textos jurídicos.    
+         Os modelos de linguagem utilizados na aplicação são os primeiros modelos BERT em Português Brasileiro treinados para reconhecer entidades jurídicas.  
+         Os modelos estão disponíveis nestes links: [Luciano/bertimbau-large-lener_br](https://huggingface.co/Luciano/bertimbau-large-lener_br) e [Luciano/bertimbau-base-lener_br](https://huggingface.co/Luciano/bertimbau-base-lener_br).
+         Os modelos atingiram o Estado-da-Arte para Processamento de Linguagem Natural, com a versão *large* atingindo _Accuracy_ de 0.9801 e _F1-score_ de 0.9080. 
+         O dataset utilizado para o treinamento foi o [LeNER-Br](https://cic.unb.br/~teodecampos/LeNER-Br/), que contém, na sua maioria, textos de ementas de tribunais superiores.  
+         O modelo, portanto, não foi treinado com textos de petições de advogados, sendo que esta é uma das hipóteses que se quer avaliar como oportunidade de melhoria para trabalhos futuros.
+    """)
 st.write('Por favor, ao final da sua avaliação, responda ao [questionário](http://www.questionario.com).')
 
 ### Parâmetros do processamento
