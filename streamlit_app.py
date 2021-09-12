@@ -26,7 +26,7 @@ with st.expander('Leia-me 👉'):
     st.markdown(
         "Having trouble finding your Goodreads profile? Head to the [Goodreads website](https://www.goodreads.com/) and click profile in the top right corner."
     )
-    st.write("""
+    st.markdown("""
          O objetivo desta aplicação é avaliar o uso de inteligência artificial aplicada ao Direito, mais especificamente do reconhecimento de entidades nomeadas em textos jurídicos.    
          Os modelos de linguagem utilizados na aplicação são os primeiros modelos BERT em Português Brasileiro treinados para reconhecer entidades jurídicas.  
          Os modelos estão disponíveis nestes links: [Luciano/bertimbau-large-lener_br](https://huggingface.co/Luciano/bertimbau-large-lener_br) e [Luciano/bertimbau-base-lener_br](https://huggingface.co/Luciano/bertimbau-base-lener_br).
