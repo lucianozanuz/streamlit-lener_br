@@ -24,7 +24,7 @@ st.title(titulo)
 
 with st.expander('Leia-me 👉'):
     st.markdown("""
-         O objetivo desta aplicação é avaliar o uso de inteligência artificial aplicada ao Direito, mais especificamente do reconhecimento de entidades mencionadas (NER - Named Entity Recognition) em textos jurídicos.    
+         O objetivo desta aplicação é avaliar o uso de inteligência artificial aplicada ao Direito, mais especificamente do reconhecimento de entidades mencionadas (NER - Named Entity Recognition) em textos jurídicos.
          
          Os modelos de linguagem utilizados na aplicação são os primeiros modelos BERT em Português Brasileiro treinados para reconhecer entidades jurídicas e
          estão disponíveis nestes links: [Luciano/bertimbau-large-lener_br](https://huggingface.co/Luciano/bertimbau-large-lener_br) e [Luciano/bertimbau-base-lener_br](https://huggingface.co/Luciano/bertimbau-base-lener_br).
@@ -33,7 +33,7 @@ with st.expander('Leia-me 👉'):
          O dataset utilizado para o treinamento foi o [LeNER-Br](https://cic.unb.br/~teodecampos/LeNER-Br/), que contém, na sua maioria, textos de ementas de tribunais superiores.
          Os modelos, portanto, não foram treinador com textos de petições de advogados, sendo que esta é uma das hipóteses que se quer avaliar como oportunidade de melhoria para trabalhos futuros.
          
-         PDF de petições de exemplo para download e utilização:
+         PDF de petições de exemplo para download e utilização nos testes:
          - [Petição 1](https://drive.google.com/file/d/1__svtC51NlS0qDLQXwYNMtIgmOJlGXcC/view?usp=sharing)
          - [Petição 2](https://drive.google.com/file/d/11ULo0vWRMUOhl7THc6P7SsKum6gKBT7X/view?usp=sharing)
          - [Petição 3](https://drive.google.com/file/d/1NrZ0ESdsjqLY129wkKsaiZoqxXIhn5uI/view?usp=sharing)
