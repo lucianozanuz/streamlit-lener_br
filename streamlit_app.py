@@ -28,7 +28,7 @@ with st.expander('Leia-me 👉'):
          
          Os modelos de linguagem utilizados na aplicação são os primeiros modelos BERT em Português Brasileiro treinados para reconhecer entidades jurídicas e
          estão disponíveis nestes links: [Luciano/bertimbau-large-lener_br](https://huggingface.co/Luciano/bertimbau-large-lener_br) e [Luciano/bertimbau-base-lener_br](https://huggingface.co/Luciano/bertimbau-base-lener_br).
-         Os modelos atingiram o Estado-da-Arte para a _task NER_ de processamento de linguagem natural, com a versão _large_ atingindo _Accuracy_ de **0.9801** e _F1-score_ de **0.9080**.  
+         Os modelos atingiram o Estado-da-Arte para a _task NER_ de processamento de linguagem natural, com a versão _large_ atingindo _Accuracy_ de **0.9801** e _F1-score_ de **0.9080**.
          
          O dataset utilizado para o treinamento foi o [LeNER-Br](https://cic.unb.br/~teodecampos/LeNER-Br/), que contém, na sua maioria, textos de ementas de tribunais superiores.
          Os modelos, portanto, não foram treinador com textos de petições de advogados, sendo que esta é uma das hipóteses que se quer avaliar como oportunidade de melhoria para trabalhos futuros.
