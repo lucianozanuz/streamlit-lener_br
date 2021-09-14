@@ -113,8 +113,8 @@ headers = {"Authorization": f"Bearer {API_TOKEN}"}
 #     index=2)
 aggregation_strategy = 'average'
 
-debug = st.sidebar.checkbox('Debug')
-# debug = False
+# debug = st.sidebar.checkbox('Debug')
+debug = False
 if debug:
     st.sidebar.write(st.session_state)
 
@@ -182,7 +182,8 @@ with st.spinner('Carregando tokenizer...'):
 ### NER via Pipeline sobre o texto de exemplo
 
 st.subheader('Resultado do texto de exemplo')
-txt = st.text_area('Texto de exemplo (é possível editar diretamente neste campo; Ctrl+Enter para aplicar as alterações)', txt_exemplo, height=300, key="area1")
+# txt = st.text_area('Texto de exemplo (é possível editar diretamente neste campo; Ctrl+Enter para aplicar as alterações)', txt_exemplo, height=300, key="area1")
+txt = st.text_area('Texto de exemplo (é possível editar diretamente neste campo; Ctrl+Enter para aplicar as alterações)', txt_exemplo, height=300)
 ner_df, ner_displacy = ner_pipeline(txt, modelo_treinado, tokenizer_treinado, aggregation_strategy)
 st.write(ner_displacy, unsafe_allow_html=True)
 my_table = st.table(ner_df)
