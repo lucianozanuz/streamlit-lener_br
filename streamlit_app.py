@@ -350,7 +350,7 @@ elif opt_pdf == "pdfplumber por frase":
 
     # txt_pdf = st.text_area('Texto do PDF via pdfpumbler por frase', pdf_text, height=300, key="area5")
     # txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300, key="area5")
-    st.text_area('Texto do PDF', pdf_text, height=300, key="area5")
+    txt_pdf = st.text_area('Texto do PDF', pdf_text, height=300)
     if uploaded_file is not None:
         tbl_df = pd.DataFrame()
         for i, item in enumerate(sequences):
