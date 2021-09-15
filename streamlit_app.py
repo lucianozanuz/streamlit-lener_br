@@ -31,7 +31,7 @@ with st.expander('Leia-me 👉'):
          Os modelos atingiram o Estado-da-Arte para a _task NER_ de processamento de linguagem natural, com a versão _large_ atingindo _Accuracy_ de **0.9801** e _F1-score_ de **0.9080**.
          
          O dataset utilizado para o treinamento foi o [LeNER-Br](https://cic.unb.br/~teodecampos/LeNER-Br/), que contém, na sua maioria, textos de ementas de tribunais superiores.
-         Os modelos, portanto, não foram treinador com textos de petições de advogados, sendo que esta é uma das hipóteses que se quer avaliar como oportunidade de melhoria para trabalhos futuros.
+         Os modelos, portanto, não foram treinados com textos de petições de advogados, sendo que esta é uma das hipóteses que se quer avaliar como oportunidade de melhoria para trabalhos futuros.
          
          PDF de petições de exemplo para download e utilização nos testes:
          - [Petição 1](https://drive.google.com/file/d/1__svtC51NlS0qDLQXwYNMtIgmOJlGXcC/view?usp=sharing)
