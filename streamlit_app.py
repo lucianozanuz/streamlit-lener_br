@@ -38,7 +38,7 @@ with st.expander('Leia-me 👉'):
          - [Petição 2](https://drive.google.com/file/d/11ULo0vWRMUOhl7THc6P7SsKum6gKBT7X/view?usp=sharing)
          - [Petição 3](https://drive.google.com/file/d/1NrZ0ESdsjqLY129wkKsaiZoqxXIhn5uI/view?usp=sharing)         
     """)
-st.write('[Vídeo demonstrativo](https://drive.google.com/file/d/1PXViiok_oR5ZZiFQ701nmxrvjRmVGOCk/view?usp=sharing).')
+st.write('[Vídaeo demonstrativo](https://drive.google.com/file/d/1PXViiok_oR5ZZiFQ701nmxrvjRmVGOCk/view?usp=sharing).')
 st.write('Por favor, ao final da sua avaliação, responda ao [questionário](https://forms.gle/ZsFCGFasarkchR6SA).')
 
 ### Parâmetros do processamento
