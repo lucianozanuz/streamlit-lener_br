@@ -159,8 +159,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
 # @st.cache(max_entries=1, ttl=300)
 # @st.cache(suppress_st_warning=True)
 # @st.cache(suppress_st_warning=True, hash_funcs={AutoModelForTokenClassification: lambda _: None}, max_entries=1, ttl=300)
-# @st.cache(suppress_st_warning=True, hash_funcs={AutoModelForTokenClassification: lambda _: None}, max_entries=1)
-@st.cache(suppress_st_warning=True, allow_output_mutation=True, max_entries=1)
+@st.cache(suppress_st_warning=True, hash_funcs={AutoModelForTokenClassification: lambda _: None}, max_entries=1)
 def carrega_modelo(modelo):
     st.write('Cache miss: carrega_modelo(',modelo,')')
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
