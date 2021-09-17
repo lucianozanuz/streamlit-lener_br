@@ -159,7 +159,7 @@ def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strateg
 # @st.cache(max_entries=1, ttl=300)
 # @st.cache(suppress_st_warning=True)
 # @st.cache(suppress_st_warning=True, hash_funcs={AutoModelForTokenClassification: lambda _: None}, max_entries=1, ttl=300)
-@st.cache(suppress_st_warning=True, hash_funcs={AutoModelForTokenClassification: lambda _: None}, max_entries=1)
+@st.cache(suppress_st_warning=True, hash_funcs={"AutoModelForTokenClassification": lambda _: None}, max_entries=1)
 def carrega_modelo(modelo):
     st.write('Cache miss: carrega_modelo(',modelo,')')
     modelo_treinado = AutoModelForTokenClassification.from_pretrained(modelo)
@@ -334,7 +334,6 @@ elif opt_pdf == "pdfplumber por frase":
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 pdf_text += page.extract_text()
-        pdf.close()
 
         #pdf_text.replace('\n', '')
         # pdf_text = pdf_text.replace('\n', '')
