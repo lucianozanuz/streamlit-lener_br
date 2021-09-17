@@ -334,6 +334,7 @@ elif opt_pdf == "pdfplumber por frase":
         with pdfplumber.open(uploaded_file) as pdf:
             for page in pdf.pages:
                 pdf_text += page.extract_text()
+        pdf.close()
 
         #pdf_text.replace('\n', '')
         # pdf_text = pdf_text.replace('\n', '')
