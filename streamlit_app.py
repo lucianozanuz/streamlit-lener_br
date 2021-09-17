@@ -103,7 +103,7 @@ opt_pdf = 'pdfplumber por frase'
 # modelo = st.sidebar.radio(
 #     "Modelo treinado",
 #     ('Luciano/bertimbau-large-lener_br', 'Luciano/bertimbau-base-lener_br'), index=1)
-modelo = 'Luciano/bertimbau-base-lener_br'
+modelo = 'Luciano/bertimbau-large-lener_br'
 API_URL = "https://api-inference.huggingface.co/models/" + modelo
 API_TOKEN = st.secrets["api_token"]
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
