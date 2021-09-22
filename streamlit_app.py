@@ -191,13 +191,11 @@ my_table = st.table(ner_df)
 
 ### NER via API sobre o texto de exemplo
 
-@st.cache
 def query(payload):
     data = json.dumps(payload)
     response = requests.request("POST", API_URL, headers=headers, data=data)
     return json.loads(response.content.decode("utf-8"))
 
-@st.cache
 def ajusta_retorno_api(data):
     new_data = []
     new_i = -1
@@ -210,7 +208,6 @@ def ajusta_retorno_api(data):
             new_i += 1
     return new_data
 
-@st.cache
 def mostra_ner(texto, ajusta_retorno=False):
     # data = query({"inputs": texto, "options": {"wait_for_model": "true"}})
     data = query({"inputs": texto})
