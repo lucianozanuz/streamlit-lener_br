@@ -243,9 +243,15 @@ if inclui_api:
 
 st.subheader('Resultado do PDF')
 
+@st.cache
+def carrega_spacy(pdf_text):
+    # nlp = spacy.load("pt_core_news_sm")
+    return spacy.load("pt_core_news_sm", exclude=["parser"])
+
 def get_frases(pdf_text):
     # nlp = spacy.load("pt_core_news_sm")
-    nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
+    # nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
+    nlp = carrega_spacy()
     nlp.enable_pipe("senter")
     doc = nlp(pdf_text)
     sequences = []
