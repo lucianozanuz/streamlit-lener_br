@@ -243,7 +243,7 @@ if inclui_api:
 
 st.subheader('Resultado do PDF')
 
-@st.cache
+@st.cache(hash_funcs={"spacy.lang.pt.Portuguese": lambda _: None}, max_entries=1)
 def carrega_spacy():
     # nlp = spacy.load("pt_core_news_sm")
     return spacy.load("pt_core_news_sm", exclude=["parser"])
