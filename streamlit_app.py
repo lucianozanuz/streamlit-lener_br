@@ -130,7 +130,6 @@ colors = {"PESSOA": "linear-gradient(90deg, rgba(9,2,124,1) 0%, rgba(34,34,163,1
           }
 options = {"colors": colors}
 
-@st.cache
 def ner_pipeline(texto, modelo_treinado, tokenizer_treinado, aggregation_strategy):
     if texto == "":
         return pd.DataFrame(), texto
@@ -247,7 +246,6 @@ if inclui_api:
 
 st.subheader('Resultado do PDF')
 
-
 def get_frases(pdf_text):
     # nlp = spacy.load("pt_core_news_sm")
     nlp = spacy.load("pt_core_news_sm", exclude=["parser"])
@@ -257,7 +255,6 @@ def get_frases(pdf_text):
     for i, sent in enumerate(doc.sents):
         sequences.append(sent.text)
     return sequences
-
 
 def download_csv(tbl_df):
     tbl_csv = tbl_df.to_csv()
