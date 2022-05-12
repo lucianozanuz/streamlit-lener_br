@@ -6,3 +6,4 @@ spacy
 https://github.com/explosion/spacy-models/releases/download/pt_core_news_sm-3.0.0/pt_core_news_sm-3.0.0-py3-none-any.whl
 pdfminer.six
 pdfplumber
+click<7.2.0,>=7.1.1
