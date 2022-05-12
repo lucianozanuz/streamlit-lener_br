@@ -2,7 +2,7 @@ streamlit
 pandas
 torch
 transformers
-spacy==3.0.0
+spacy==3.2.0
 https://github.com/explosion/spacy-models/releases/download/pt_core_news_sm-3.0.0/pt_core_news_sm-3.0.0-py3-none-any.whl
 pdfminer.six
 pdfplumber
